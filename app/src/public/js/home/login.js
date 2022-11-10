@@ -1,5 +1,5 @@
 "use strict";
-
+// Frontend 화면: HTML과 연결된 javascript 파일
 const id = document.querySelector("#id"), // #: tag에 id로 부여되어 있는 id를 가져옴
     psword = document.querySelector("#psword"),
     loginBtn = document.querySelector("button");
@@ -18,5 +18,7 @@ function login() {
             "content-Type": "application/json"
         },
         body: JSON.stringify(req),
-    });
+    })
+    .then((res) => res.json())
+    .then(console.log);
 }
