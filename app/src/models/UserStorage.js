@@ -1,22 +1,34 @@
 "use strict";
 
 class UserStorage {
-    static #users = { // #: public >> private 변환(외부에서 불러올 수 없음)
-        id: ["asdf", "qwer", "zxcv"],
-        psword: ["1234", "1234", "12345"],
-        name: ["서범석", "민웅기", "홍길동"],
-    };
+  static #users = { // #: public >> private 변환(외부에서 불러올 수 없음)
+    id: ["asdf", "qwer", "zxcv"],
+    psword: ["1234", "1234", "12345"],
+    name: ["서범석", "민웅기", "홍길동"],
+  };
 
-    static getUsers(...fields) {
-        const users = this.#users;
-        const newUsers = fields.reduce((newUsers, field) =>{
-            if (users.hasOwnProperty(field)) {
-                newUsers[field] = users[field];
-            }
-            return newUsers;
-        }, {});
-        return newUsers;
-    }
+  static getUsers(...fields) {
+    const users = this.#users;
+    const newUsers = fields.reduce((newUsers, field) =>{
+      if (users.hasOwnProperty(field)) {
+        newUsers[field] = users[field];
+      }
+      return newUsers;
+    }, {});
+    return newUsers;
+  }
+
+  static getUserInfo(id) {
+    const users = this.#users;
+    const idx = users.id.indexOf(id);
+    const usersKeys = Object.keys(users);
+    const userInfo = usersKeys.reduce((newUser, info) => {
+      newUser[info] = users[info][idx];
+      return newUser;
+    }, {});
+
+    return userInfo;
+  }
 }
 
 module.exports = UserStorage;
