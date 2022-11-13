@@ -1,30 +1,30 @@
 const RANDOM_QUOTE_APU_URL = 'http://api.quotable.io/random'
-const quoteDisplayElement = document.getElementById('quoteDisplay')
-const quoteInputElement = document.getElementById('quoteInput')
+const wordDisplayElement = document.getElementById('wordDisplay')
+const wordInputElement = document.getElementById('wordInput')
 const timerElement = document.getElementById('timer')
 
 import {wordData} from "./wordList.js"
 
 function randomWord(){
-    let arr 
+    let random = Math.floor(Math.random()*(10000-1)+1)
+    let arr = wordData[random]
     for (let i = 0; i < 20; i++) {
-        let random = Math.floor(Math.random()*(10000-1)+1)
-        arr = arr+' '+wordData[random]
+        random = Math.floor(Math.random()*(10000-1)+1)
+        arr = arr + ' '+wordData[random]
     }
     return arr
 }
 
 
 function getPractice() {
-    const quote = randomWord()
-    quoteDisplayElement.innerText = ''
-    quote.split('').forEach(character =>{
+    const word = randomWord()
+    wordDisplayElement.innerText = ''
+    word.split('').forEach(character =>{
         const characterSpan = document.createElement('span')
         characterSpan.innerText = character
-        quoteDisplayElement.appendChild(characterSpan)
+        wordDisplayElement.appendChild(characterSpan)
     })
-    quoteInputElement.value = null
-    startTimer()
+    wordInputElement.value = null
 }
 
 function getRandomQuote() { //sample
@@ -35,22 +35,30 @@ function getRandomQuote() { //sample
 
 async function renderNewQuote() {   //sample
     const quote = await getRandomQuote()
-    quoteDisplayElement.innerText = ''
-    quote.split('').forEach(character =>{
+    wordDisplayElement.innerText = ''
+    word.split('').forEach(character =>{
         const characterSpan = document.createElement('span')
         characterSpan.innerText = character
-        quoteDisplayElement.appendChild(characterSpan)
+        wordDisplayElement.appendChild(characterSpan)
     })
-    quoteInputElement.value = null
-    startTimer()
+    wordInputElement.value = null
+    startTimer(1)
 }
 
-quoteInputElement.addEventListener('input', () =>{  //check every input
-const arrayQuote = quoteDisplayElement.querySelectorAll('span')
-const arrayValue = quoteInputElement.value.split('')
+wordInputElement.addEventListener('focus',()=>{
+    startTimer(1)
+})
+
+wordInputElement.addEventListener('blur',()=>{
+    startTimer(0)
+})
+
+wordInputElement.addEventListener('input', () =>{  //check every input
+const arrayWord = wordDisplayElement.querySelectorAll('span')
+const arrayValue = wordInputElement.value.split('')
 
 let correct = true
-arrayQuote.forEach((characterSpan, index)=>{
+arrayWord.forEach((characterSpan, index)=>{
     const character = arrayValue[index]
     if(character == null){
         characterSpan.classList.remove('correct')
@@ -68,17 +76,24 @@ arrayQuote.forEach((characterSpan, index)=>{
     }
     })
 
-    if(correct) getPractice()//renderNewQuote()
+    if(correct) getPractice(), startTimer(1)//renderNewQuote()
 })
 
-let startTime
-function startTimer(){
+let startTime, t
+function startTimer(i){
     timerElement.innerText = 0
-    startTime = new Date()
-    setInterval(()=>{
-        timer.innerText=getTimerTime()
+    if (i==1) {
+        startTime = new Date()
+    t = setInterval(()=>{
+    timer.innerText=getTimerTime()
     }, 1000)
+    } else {
+        clearInterval(t)
+        return
+    }
 }
+
+
 
 function getTimerTime(){
     return Math.floor((new Date() - startTime) /1000)

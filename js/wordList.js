@@ -1,4 +1,4 @@
-export let  wordData =  [
+let  wordData =  [
   "a",
 "aa",
 "aaa",
@@ -9999,4 +9999,6 @@ export let  wordData =  [
 "zu",
 "zum",
 "zus"
-];
+]
+
+export {wordData}
