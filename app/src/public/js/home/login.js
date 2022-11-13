@@ -12,7 +12,7 @@ function login() {
     psword: psword.value,
   };
 
-  fetch("/register", {
+  fetch("/login", {
     method: "POST",
     headers:{
       "Content-Type": "application/json",
