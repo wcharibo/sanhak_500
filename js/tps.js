@@ -5,7 +5,27 @@ const timerElement = document.getElementById('timer')
 
 import {wordData} from "./wordList.js"
 
-console.log(wordData[1])
+function randomWord(){
+    let arr 
+    for (let i = 0; i < 20; i++) {
+        let random = Math.floor(Math.random()*(10000-1)+1)
+        arr = arr+' '+wordData[random]
+    }
+    return arr
+}
+
+
+function getPractice() {
+    const quote = randomWord()
+    quoteDisplayElement.innerText = ''
+    quote.split('').forEach(character =>{
+        const characterSpan = document.createElement('span')
+        characterSpan.innerText = character
+        quoteDisplayElement.appendChild(characterSpan)
+    })
+    quoteInputElement.value = null
+    startTimer()
+}
 
 function getRandomQuote() { //sample
     return fetch(RANDOM_QUOTE_APU_URL)
