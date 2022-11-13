@@ -3,15 +3,36 @@ const quoteDisplayElement = document.getElementById('quoteDisplay')
 const quoteInputElement = document.getElementById('quoteInput')
 const timerElement = document.getElementById('timer')
 
+import {wordData} from "./wordList.js"
 
-quoteInputElement.addEventListener('input', () =>{
+console.log(wordData[1])
+
+function getRandomQuote() { //sample
+    return fetch(RANDOM_QUOTE_APU_URL)
+        .then(response => response.json())
+        .then(data => data.content)
+}
+
+async function renderNewQuote() {   //sample
+    const quote = await getRandomQuote()
+    quoteDisplayElement.innerText = ''
+    quote.split('').forEach(character =>{
+        const characterSpan = document.createElement('span')
+        characterSpan.innerText = character
+        quoteDisplayElement.appendChild(characterSpan)
+    })
+    quoteInputElement.value = null
+    startTimer()
+}
+
+quoteInputElement.addEventListener('input', () =>{  //check every input
 const arrayQuote = quoteDisplayElement.querySelectorAll('span')
 const arrayValue = quoteInputElement.value.split('')
 
 let correct = true
 arrayQuote.forEach((characterSpan, index)=>{
     const character = arrayValue[index]
-    if(character === null){
+    if(character == null){
         characterSpan.classList.remove('correct')
         characterSpan.classList.remove('incorrect')
         correct = false
@@ -27,26 +48,8 @@ arrayQuote.forEach((characterSpan, index)=>{
     }
     })
 
-    if(correct) renderNewQuote()
+    if(correct) getPractice()//renderNewQuote()
 })
-
-function getRandomQuote() {
-    return fetch(RANDOM_QUOTE_APU_URL)
-        .then(response => response.json())
-        .then(data => data.content)
-}
-
-async function renderNewQuote() {
-    const quote = await getRandomQuote()
-    quoteDisplayElement.innerText = quote
-    quote.split('').forEach(character =>{
-        const characterSpan = document.createElement('span')
-        characterSpan.innerText = character
-        quoteDisplayElement.appendChild(characterSpan)
-    })
-    quoteInputElement.value = null
-    startTimer()
-}
 
 let startTime
 function startTimer(){
@@ -61,4 +64,5 @@ function getTimerTime(){
     return Math.floor((new Date() - startTime) /1000)
 }
 
-renderNewQuote()
+getPractice()
+//renderNewQuote()
