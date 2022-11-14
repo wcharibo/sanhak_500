@@ -9,6 +9,7 @@ body{
     min-height: 100vh;
     margin: 0;
     background-color: beige;
+    position: relative;
 }
 
 body, .word-input{
@@ -21,6 +22,8 @@ body, .word-input{
     border-radius: .5rem;
     width: 700px;
     max-width: 90%;
+    
+    
 }
 
 .timer{
@@ -35,6 +38,9 @@ body, .word-input{
     margin-bottom: 1rem;
     margin-left: calc(1rem + 2px);
     margin-right: calc(1rem + 2px);
+    padding: 0.64rem 0rem;
+    position: relative;
+    z-index: 1;
 }
 
 .word-input{
@@ -48,6 +54,9 @@ body, .word-input{
     padding: .5rem 1rem;
     font-size: 1rem;
     border-radius: .5rem;
+    color: #ccc;
+    position: relative;
+    z-index: 0;
 }
 
 .word-input:focus {
@@ -61,4 +70,17 @@ body, .word-input{
 .incorrect {
     color: red;
     text-decoration: underline;
+}
+
+#restartBox{}
+    
+
+#restartBtn{
+    border-radius: var(--roundness);
+    color: var(--sub-color);
+    cursor: pointer;
+    padding: 1rem 2rem;
+    transition: .125s;
+    width: min-content;
+    
 }

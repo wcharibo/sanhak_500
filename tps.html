@@ -3,6 +3,7 @@
     <head>
         <meta name="description" content="provide customized typing practice">
         <meta charset="UTF-8">
+        <link rel="restartImg" sizes="57x57" href="img/restart_icon.png">
         <link rel="stylesheet" href="css/tps.css">
         <script type="module" src="js/tps.js" defer></script>
         <title>
@@ -14,7 +15,12 @@
         <div class="timer" id="timer"></div>
         <div class="container">
             <div class="word-display" id="wordDisplay"></div>
-            <textarea id="wordInput" class= "word-input" autofocus></textarea>
+            <textarea id="wordInput" class= "word-input" ></textarea>
+        <div class="restartBox">
+            <button id="restartBtn" aria-label="Restart Practice" data-ballon-pos="down" 
+            class tabindex="0" onclick="this.blur()">restart</button>
+        </div>
         </div>
     </body>
+
 </html>

@@ -9999,6 +9999,6 @@ let  wordData =  [
 "zu",
 "zum",
 "zus"
-]
+];
 
-export {wordData}
+export {wordData};
