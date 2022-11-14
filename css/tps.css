@@ -17,7 +17,7 @@ body, .word-input{
 }
 
 .container{
-    background-color: bisque;
+    background-color: #ffe4c4;
     padding: 1rem;
     border-radius: .5rem;
     width: 700px;
@@ -83,4 +83,9 @@ body, .word-input{
     transition: .125s;
     width: min-content;
     
+}
+
+#restartBtn:hover{
+    font-weight: bold;
+    background-color: beige;
 }

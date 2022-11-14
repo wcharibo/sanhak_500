@@ -11,7 +11,7 @@ function randomWord(){
     let arr = wordData[random];
     for (let i = 0; i < 20; i++) {
         random = Math.floor(Math.random()*(10000-1)+1);
-        arr = arr + ' '+wordData[random];
+        arr = arr + ' ' + wordData[random];
     }
     return arr;
 };
@@ -97,8 +97,6 @@ function startTimer(i){
         return;
     }
 }
-
-
 
 function getTimerTime(){
     return Math.floor((new Date() - startTime) /1000);
