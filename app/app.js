@@ -5,9 +5,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config();
+
 const app = express();
 
-const PORT = 3000;
+
 const home = require("./src/routes/home");
 
 app.set("views", "./src/views");
