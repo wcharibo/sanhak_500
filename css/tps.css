@@ -38,8 +38,9 @@ body, .word-input{
     margin-bottom: 1rem;
     margin-left: calc(1rem + 2px);
     margin-right: calc(1rem + 2px);
+    width: 650px;
     padding: 0.64rem 0rem;
-    position: relative;
+    position: absolute;
     z-index: 1;
 }
 

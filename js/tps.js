@@ -3,6 +3,7 @@ const wordDisplayElement = document.querySelector('#wordDisplay');
 const wordInputElement = document.querySelector('#wordInput');
 const timerElement = document.querySelector('#timer');
 const restartElement = document.querySelector('#restartBtn');
+let errorCnt =0;
 
 import {wordData} from "./wordList.js";
 
@@ -60,6 +61,7 @@ const arrayValue = wordInputElement.value.split('');
 let correct = true;
 arrayWord.forEach((characterSpan, index)=>{
     const character = arrayValue[index];
+    // console.log(character);
     if(character == null){
         characterSpan.classList.remove('correct');
         characterSpan.classList.remove('incorrect');
@@ -73,15 +75,15 @@ arrayWord.forEach((characterSpan, index)=>{
         characterSpan.classList.remove('correct');
         characterSpan.classList.add('incorrect');
         correct = false;
+        errorCnt = errorCnt + 1;
     }
     });
 
-    if(correct) {}   //renderNewQuote()
+    if(correct) {console.log(errorCnt);}  //renderNewQuote()
 })
 
 restartElement.addEventListener('click', ()=>{  //restart Button
-    getPractice()
-    startTimer()
+    getPractice();
 });
 
 let startTime, t;
