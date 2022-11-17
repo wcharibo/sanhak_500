@@ -22,8 +22,6 @@ body, .word-input{
     border-radius: .5rem;
     width: 700px;
     max-width: 90%;
-    
-    
 }
 
 .timer{
@@ -42,6 +40,7 @@ body, .word-input{
     padding: 0.64rem 0rem;
     position: absolute;
     z-index: 1;
+    display: block;
 }
 
 .word-input{
@@ -58,6 +57,7 @@ body, .word-input{
     color: #ccc;
     position: relative;
     z-index: 0;
+    display: block;
 }
 
 .word-input:focus {
@@ -73,7 +73,23 @@ body, .word-input{
     text-decoration: underline;
 }
 
-#restartBox{}
+
+.result-display{
+    background-color: transparent;
+    border: 2px solid #a1922e;
+    outline: none;
+    width: 100%;
+    height: 8.15rem;
+    margin: auto;
+    resize: none;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+    color: black;
+    position: relative;
+    z-index: 0;
+    display: none;
+}
     
 
 #restartBtn{
