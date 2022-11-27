@@ -4,6 +4,8 @@ const wordInputElement = document.querySelector('#wordInput');
 const timerElement = document.querySelector('#timer');
 const restartElement = document.querySelector('#restartBtn');
 const resultDisplayElement = document.querySelector('#resultDisplay');
+let arrayWord = wordDisplayElement.querySelectorAll('span');
+let arrayValue = wordInputElement.value.split('');
 let errCnt = 0;
 let backspaceCnt = 0;
 let timeTable = new Array();
@@ -73,8 +75,8 @@ wordInputElement.addEventListener('focus',()=>{     //input focus->start timer, 
 
 
 wordInputElement.addEventListener('input', () =>{  //check every input
-    const arrayWord = wordDisplayElement.querySelectorAll('span');
-    const arrayValue = wordInputElement.value.split('');
+    arrayWord = wordDisplayElement.querySelectorAll('span');
+    arrayValue = wordInputElement.value.split('');
     let key;
     // console.log(arrayValue);//이게 키포인트 인듯
     // console.log(arrayWord[arrayValue.length-1].innerText);
@@ -121,15 +123,11 @@ wordInputElement.addEventListener('input', () =>{  //check every input
         });
 
     if(arrayWord.length==arrayValue.length || timerElement.innerText == 0) {
-        for (let i = 0; i < arrayWord.length; i++) {
-            if(arrayWord[i].className.includes('fixed')){
-                errCnt += 1;
-            }
-        }   
-            getResult();
-            wordTime();
-            console.log(`${errCnt} error detected`);
-            console.log(arrayWord);
+        countError();
+        getResult();
+        wordTime();
+        console.log(`${errCnt} error detected`);
+        console.log(arrayWord);
         }  //renderNewQuote()
         timeCnt+=1;
     })
@@ -144,6 +142,14 @@ wordInputElement.addEventListener('input', () =>{  //check every input
         getPractice();
     });
 
+    const countError = ()=>{
+        for (let i = 0; i < arrayWord.length; i++) {
+            if(arrayWord[i].className.includes('fixed')){
+                errCnt += 1;
+            }
+        }   
+    }
+
     function wordTime(){
         console.log(timeTable);
     };
@@ -155,7 +161,7 @@ wordInputElement.addEventListener('input', () =>{  //check every input
         startTime = new Date();
         timerInterval = setInterval(()=>{
         timerElement.innerText= 30-getTimerTime();
-        if(timerElement.innerText == 0) getResult();    //if timer is 0 then stop practice and getResult
+        if(timerElement.innerText == 0) {countError(); getResult();} //if timer is 0 then stop practice and getResult
         }, 1000);
         } 
         else {
