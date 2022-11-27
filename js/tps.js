@@ -4,8 +4,10 @@ const wordInputElement = document.querySelector('#wordInput');
 const timerElement = document.querySelector('#timer');
 const restartElement = document.querySelector('#restartBtn');
 const resultDisplayElement = document.querySelector('#resultDisplay');
+const setTimer = document.querySelectorAll('input[name=timer]');
 let arrayWord = wordDisplayElement.querySelectorAll('span');
 let arrayValue = wordInputElement.value.split('');
+let practiceTime= document.querySelector('input[name="timer"]:checked').value;
 let errCnt = 0;
 let backspaceCnt = 0;
 let timeTable = new Array();
@@ -13,7 +15,7 @@ let timeCnt=0;
 
 import {wordData} from "./wordList.js";
 
-function randomWord(){
+function randomWord(){      //랜덤 연습모드를 위한 단어 랜덤하게 가져오기
     let random = Math.floor(Math.random()*(10000-1)+1);
     let arr = wordData[random];
     for (let i = 0; i < 20; i++) {
@@ -23,8 +25,16 @@ function randomWord(){
     return arr;
 };
 
+setTimer.forEach(timer=>{   //연습시간 설정
+    timer.addEventListener('click', ()=>{
+        if(timer.checked){
+        practiceTime = timer.value;
+        timerElement.innerText = practiceTime;
+    }
+    })
+})
 
-function getPractice() {
+function getPractice() {    //모드에 따라 가져오 단어 분리하기
     const word = randomWord();
     wordDisplayElement.innerText = '';
         word.split('').forEach((character) =>{
@@ -35,7 +45,7 @@ function getPractice() {
     wordInputElement.value = null;
 };
 
-const getResult =()=>{
+const getResult =()=>{      //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
     startTimer(0);
     resultDisplayElement.style.display='block';
     wordDisplayElement.style.display = 'none';
@@ -64,7 +74,7 @@ async function renderNewQuote() {   //sample
 
 
 
-wordInputElement.addEventListener('focus',()=>{     //input focus->start timer, input unfocused->stop timer and reset
+wordInputElement.addEventListener('focus',()=>{         //input focus->start timer, input unfocused->stop timer and reset
     startTimer(1);
     wordInputElement.addEventListener('blur',()=>{
         startTimer(0);
@@ -74,7 +84,7 @@ wordInputElement.addEventListener('focus',()=>{     //input focus->start timer, 
 });
 
 
-wordInputElement.addEventListener('input', () =>{  //check every input
+wordInputElement.addEventListener('input', () =>{       //인풋 이벤트 발생할 때마다 입력된 글자와 비교하여 색 wordDisplay에 색표시
     arrayWord = wordDisplayElement.querySelectorAll('span');
     arrayValue = wordInputElement.value.split('');
     let key;
@@ -122,7 +132,7 @@ wordInputElement.addEventListener('input', () =>{  //check every input
         }
         });
 
-    if(arrayWord.length==arrayValue.length || timerElement.innerText == 0) {
+    if(arrayWord.length==arrayValue.length || timerElement.innerText == 0) {    //타이머가 0이거나 단어를 모두 입력하면 연습 종료
         countError();
         getResult();
         wordTime();
@@ -132,7 +142,7 @@ wordInputElement.addEventListener('input', () =>{  //check every input
         timeCnt+=1;
     })
     
-    restartElement.addEventListener('click', ()=>{  //restart Button
+    restartElement.addEventListener('click', ()=>{  //재시작하는 버튼 재시작하고 다시 입력창을 focus해줘야 하는 불편함이 있음
         resultDisplayElement.style.display= 'none';
         wordDisplayElement.style.display = 'block';
         wordInputElement.style.display = 'block';
@@ -142,7 +152,7 @@ wordInputElement.addEventListener('input', () =>{  //check every input
         getPractice();
     });
 
-    const countError = ()=>{
+    const countError = ()=>{                        //잘못 입력한 문자에 fixed 클래스 추가하여 결과를 보여줄 때 fixed 클래스 카운트하는 함수
         for (let i = 0; i < arrayWord.length; i++) {
             if(arrayWord[i].className.includes('fixed')){
                 errCnt += 1;
@@ -150,17 +160,17 @@ wordInputElement.addEventListener('input', () =>{  //check every input
         }   
     }
 
-    function wordTime(){
+    const wordTime = ()=>{                          //문자입력시간 분리
         console.log(timeTable);
     };
     
     let startTime, timerInterval;
-    function startTimer(i){ //
-        timerElement.innerText = 30;
+    const startTimer = (i)=>{                       //타이머
+        timerElement.innerText = practiceTime;
         if (i==1) {
         startTime = new Date();
         timerInterval = setInterval(()=>{
-        timerElement.innerText= 30-getTimerTime();
+        timerElement.innerText= practiceTime-getTimerTime();
         if(timerElement.innerText == 0) {countError(); getResult();} //if timer is 0 then stop practice and getResult
         }, 1000);
         } 
@@ -168,11 +178,11 @@ wordInputElement.addEventListener('input', () =>{  //check every input
         clearInterval(timerInterval);
         return;
         }
-    }
+    };
 
-function getTimerTime(){
+const getTimerTime = ()=>{                          //연습을 시작한 시간에서 현재 시간을 빼주는 함수
     return Math.floor((new Date() - startTime) /1000);
-}
+};
 
 getPractice();
 //renderNewQuote()
