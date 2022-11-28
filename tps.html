@@ -13,9 +13,11 @@
 
     <body>
         <div class="timer" id="timer"></div>
-        <div><input type="radio" name="timer" value="15" >15</div>
-        <div><input type="radio" name="timer" value="30" checked>30</div>
-        <div><input type="radio" name="timer" value="60" >60</div>
+        <div class="timerTimes"><h3>select practice time</h3>
+            <div><label class="timerTime"><input type="radio" name="timer" value="15" ><span>15</span></label></div>
+            <div><label class="timerTime"><input type="radio" name="timer" value="30" checked><span>30</span></label></div>
+            <div><label class="timerTime"><input type="radio" name="timer" value="60" ><span>60</span></label></div>
+        </div>
         <div class="container">
             <div class="word-display" id="wordDisplay"></div>
             <div class="result-display" id="resultDisplay"></div>

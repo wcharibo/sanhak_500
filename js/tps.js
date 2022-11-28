@@ -185,4 +185,3 @@ const getTimerTime = ()=>{                          //연습을 시작한 시간
 };
 
 getPractice();
-//renderNewQuote()

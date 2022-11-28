@@ -106,3 +106,31 @@ body,.word-display, .word-input{
     font-weight: bold;
     background-color: beige;
 }
+
+.timerTimes {
+    position: absolute;
+    top: 6rem;
+    text-align: center;
+}
+
+.timerTime{
+    position: relative;
+    font-size: 20px;
+    line-height: 2rem;
+    padding: 0.2em 0.4em;
+  }
+  
+  .timerTime input[name=timer] {
+    vertical-align: middle;
+    appearance: none;
+  }
+
+  .timerTime:hover{
+    background-color: #ffe4c4;
+    border-radius: 0.5rem;
+  }
+
+  .timerTime:checked{
+    background-color: #ffe4c4;
+    border-radius: 0.5rem;
+  }
