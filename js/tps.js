@@ -78,6 +78,12 @@ wordInputElement.addEventListener('focus',()=>{         //input focus->start tim
     startTimer(1);
     wordInputElement.addEventListener('blur',()=>{
         startTimer(0);
+        wordInputElement.value = '';
+        arrayWord.forEach((characterSpan)=>{
+            characterSpan.classList.remove('correct');
+            characterSpan.classList.remove('incorrect');
+            characterSpan.classList.remove('fixed');
+        })
     });
 });
 
