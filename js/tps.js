@@ -10,8 +10,8 @@ let arrayValue = wordInputElement.value.split('');
 let practiceTime= document.querySelector('input[name="timer"]:checked').value;
 let errCnt = 0;
 let backspaceCnt = 0;
-let timeTable = new Array();
-let timeExTable = new Array();
+let timeTable = new Array;  //입력시간 저장할 테이블
+let timeCalTable = new Array;   //문자 사이 입력시간 저장할 테이블
 
 import {wordData} from "./wordList.js";
 
@@ -79,8 +79,6 @@ wordInputElement.addEventListener('focus',()=>{         //input focus->start tim
     wordInputElement.addEventListener('blur',()=>{
         startTimer(0);
     });
-    
-
 });
 
 
@@ -88,7 +86,6 @@ wordInputElement.addEventListener('input', () =>{       //인풋 이벤트 발�
     arrayWord = wordDisplayElement.querySelectorAll('span');
     arrayValue = wordInputElement.value.split('');
     let key;
-    timeExTable = timeTable;
     // console.log(arrayValue);//이게 키포인트 인듯
     // console.log(arrayWord[arrayValue.length-1].innerText);
     let correct = true;
@@ -150,6 +147,7 @@ wordInputElement.addEventListener('input', () =>{       //인풋 이벤트 발�
         wordInputElement.style.display = 'block';
         errCnt = 0;
         timeTable=new Array;
+        timeCalTable = new Array;
         getPractice();
     });
 
@@ -165,11 +163,10 @@ wordInputElement.addEventListener('input', () =>{       //인풋 이벤트 발�
     
     const wordTime = ()=>{                          //문자입력시간 분리
         for (let i = 1; i < arrayValue.length; i++) {
-            timeTable[i]=timeExTable[i]-timeExTable[i-1]
+            timeCalTable[i]=timeTable[i]-timeTable[i-1]
         }
-        console.log(timeExTable);
-        console.log('\n');                         
-        console.log(timeTable);
+        console.log(timeCalTable);
+        // console.log(arrayValue);
     };
     
     let startTime, timerInterval;
