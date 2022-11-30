@@ -14,6 +14,7 @@ let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
 let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
 let alphabetTable = new Array(); //입력된 알파벳 개수 기록할 테이블
+let alphabetErrorTable = new Array(); //알파벳 별로 오타 카운트
 
 import { wordData } from "./wordList.js";
 
@@ -59,7 +60,6 @@ const getResult = () => {
   wordInputElement.style.display = "none";
   let result = `${errCnt} wrong word \n typing speed: ${wpm}wpm`;
   resultDisplayElement.innerHTML = result;
-
 };
 
 function getRandomQuote() {
@@ -102,11 +102,18 @@ wordInputElement.addEventListener("input", () => {
   arrayValue = wordInputElement.value.split("");
   let key;
   if (arrayValue.length != 0) {
-    if (timeTable[arrayValue.length] != null && arrayWord[arrayValue.length - 1].className == "correct") {
+    if (
+      timeTable[arrayValue.length] != null &&
+      arrayWord[arrayValue.length - 1].className == "correct"
+    ) {
       //backspace로 이전 문자로 되돌아갔을 때 새로 시간 받아오는 것을 막음
-    } else if (arrayWord[arrayValue.length - 1].innerText == arrayValue[arrayValue.length - 1]) {
+    } else if (
+      arrayWord[arrayValue.length - 1].innerText ==
+      arrayValue[arrayValue.length - 1]
+    ) {
       timeTable[arrayValue.length - 1] = new Date();
-      timeTable[arrayValue.length - 1] = timeTable[arrayValue.length - 1].getTime();
+      timeTable[arrayValue.length - 1] =
+        timeTable[arrayValue.length - 1].getTime();
     } else {
       timeTable[arrayValue.length - 1] = 0;
     }
@@ -196,6 +203,7 @@ const calAlphabetTable = () => {
   for (let i = 0; i < 26; i++) {
     alphabetTimeTable[i] = 0;
     alphabetTable[i] = 0;
+    alphabetErrorTable[i] = 0;
   }
   for (let i = 0; i < arrayValue.length; i++) {
     switch (arrayValue[i]) {
@@ -315,6 +323,98 @@ const calAlphabetTable = () => {
   console.log(alphabetTimeTable);
 };
 
+let alphabetError = () => {
+  for (let i = 0; i < arrayValue.length; i++) {
+    if (
+      arrayWord[i].className == "fixed correct" ||
+      arrayWord[i].className == "incorrect fixed"
+    ) {
+      switch (arrayWord[i].innerText) {
+        case "a": //0
+          alphabetErrorTable[0] += 1;
+          break;
+        case "b": //1
+          alphabetErrorTable[1] += 1;
+          break;
+        case "c": //2
+          alphabetErrorTable[2] += 1;
+          break;
+        case "d": //3
+          alphabetErrorTable[3] += 1;
+          break;
+        case "e": //4
+          alphabetErrorTable[4] += 1;
+          break;
+        case "f": //5
+          alphabetErrorTable[5] += 1;
+          break;
+        case "g": //6
+          alphabetErrorTable[6] += 1;
+          break;
+        case "h": //7
+          alphabetErrorTable[7] += 1;
+          break;
+        case "i": //8
+          alphabetErrorTable[8] += 1;
+          break;
+        case "j": //9
+          alphabetErrorTable[9] += 1;
+          break;
+        case "k": //10
+          alphabetErrorTable[10] += 1;
+          break;
+        case "l": //11
+          alphabetErrorTable[11] += 1;
+          break;
+        case "m": //12
+          alphabetErrorTable[12] += 1;
+          break;
+        case "n": //13
+          alphabetErrorTable[13] += 1;
+          break;
+        case "o": //14
+          alphabetErrorTable[14] += 1;
+          break;
+        case "p": //15
+          alphabetErrorTable[15] += 1;
+          break;
+        case "q": //16
+          alphabetErrorTable[16] += 1;
+          break;
+        case "r": //17
+          alphabetErrorTable[17] += 1;
+          break;
+        case "s": //18
+          alphabetErrorTable[18] += 1;
+          break;
+        case "t": //19
+          alphabetErrorTable[19] += 1;
+          break;
+        case "u": //20
+          alphabetErrorTable[20] += 1;
+          break;
+        case "v": //21
+          alphabetErrorTable[21] += 1;
+          break;
+        case "w": //22
+          alphabetErrorTable[22] += 1;
+          break;
+        case "x": //23
+          alphabetErrorTable[23] += 1;
+          break;
+        case "y": //24
+          alphabetErrorTable[24] += 1;
+          break;
+        case "z": //25
+          alphabetErrorTable[25] += 1;
+          break;
+        default: //space
+          break;
+      }
+    }
+  }
+};
+
 let startTime, timerInterval;
 const startTimer = (i) => {
   //타이머
@@ -328,8 +428,10 @@ const startTimer = (i) => {
         getResult();
         wordTime();
         calAlphabetTable();
+        alphabetError();
         let max = Math.max(...alphabetTimeTable);
         console.log(alphabetTimeTable.indexOf(max));
+        console.log(alphabetErrorTable);
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {
@@ -345,8 +447,12 @@ const getTimerTime = () => {
 
 const getTypingSpeed = () => {
   //타이핑 속도 가져오는 함수
-  wpm = (arrayValue.length/5)*(arrayValue.length/(arrayValue.length+errCnt))*60/practiceTime;
+  wpm =
+    ((arrayValue.length / 5) *
+      (arrayValue.length / (arrayValue.length + errCnt)) *
+      60) /
+    practiceTime;
   wpm = Math.floor(wpm);
-}
+};
 
 getPractice();
