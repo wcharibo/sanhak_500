@@ -1,0 +1,131 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: beige;
+    position: relative;
+}
+
+body,.word-display, .word-input{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container{
+    background-color: #ffe4c4;
+    padding: 1rem;
+    border-radius: .5rem;
+    width: 700px;
+    max-width: 90%;
+}
+
+.timer{
+    position: absolute;
+    top: 2rem;
+    font-size: 3rem;
+    color: brown;
+    font-weight: bold;
+}
+
+.word-display{
+    margin-bottom: 1rem;
+    margin-left: calc(1rem + 2px);
+    margin-right: calc(1rem + 2px);
+    width: 650px;
+    border: 0ch;
+    border-style: solid;
+    padding: 0.64rem 0rem;
+    font-size: 2rem;
+    display: block;
+}
+
+.word-input{
+    background-color: transparent;
+    border: 2px solid #a1922e;
+    outline: none;
+    width: 100%;
+    height: 8rem;
+    margin: auto;
+    resize: none;
+    padding: .5rem 1rem;
+    font-size: 2rem;
+    border-radius: .5rem;
+    position: relative;
+    z-index: 0;
+    display: block;
+}
+
+.word-input:focus {
+    border-color: black;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+    text-decoration: underline;
+}
+
+
+.result-display{
+    background-color: transparent;
+    border: 2px solid #a1922e;
+    outline: none;
+    width: 100%;
+    height: 8.15rem;
+    margin: auto;
+    resize: none;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+    color: black;
+    position: relative;
+    z-index: 0;
+    display: none;
+}
+    
+
+#restartBtn{
+    border-radius: var(--roundness);
+    color: var(--sub-color);
+    cursor: pointer;
+    padding: 1rem 2rem;
+    transition: .125s;
+    width: min-content;
+    
+}
+
+#restartBtn:hover{
+    font-weight: bold;
+    background-color: beige;
+}
+
+.timerTimes {
+    position: absolute;
+    top: 6rem;
+    text-align: center;
+}
+
+.timerTime{
+    position: relative;
+    font-size: 20px;
+    line-height: 2rem;
+    padding: 0.2em 0.4em;
+  }
+  
+  .timerTime input[name=timer] {
+    vertical-align: middle;
+    appearance: none;
+  }
+
+  .timerTime:hover{
+    background-color: #ffe4c4;
+    border-radius: 0.5rem;
+  }
