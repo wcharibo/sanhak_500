@@ -12,7 +12,8 @@ let errCnt = 0;
 let backspaceCnt = 0;
 let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
-let alphabetTable = new Array(); //입력시간 기록할 테이블
+let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
+let alphabetTable = new Array;  //입력된 알파벳 개수 기록할 테이블
 
 import { wordData } from "./wordList.js";
 
@@ -22,7 +23,7 @@ function randomWord() {
   let arr = wordData[random];
   for (let i = 0; i < 20; i++) {
     random = Math.floor(Math.random() * (10000 - 1) + 1);
-    arr = arr + " " + wordData[random];
+    arr = arr + " " + wordData[3];
   }
   return arr;
 }
@@ -192,93 +193,121 @@ const wordTime = () => {
 
 const calAlphabetTable = () => {//입력시간이 앞의 문자에 저장됨
   for (let i = 0; i < 26; i++) {
-    alphabetTable[i] = 0;
+    alphabetTimeTable[i] = 0;
+    alphabetTable[i]=0;
   }
   for (let i = 0; i < arrayValue.length; i++) {
     switch (arrayValue[i]) {
       case "a": //0
-        alphabetTable[0] += timeCalTable[i];
+        alphabetTimeTable[0] += timeCalTable[i];
+        alphabetTable[0]+=1;
         break;
       case "b": //1
-        alphabetTable[1] += timeCalTable[i];
+        alphabetTimeTable[1] += timeCalTable[i];
+        alphabetTable[1]+=1;
         break;
       case "c": //2
-        alphabetTable[2] += timeCalTable[i];
+        alphabetTimeTable[2] += timeCalTable[i];
+        alphabetTable[2]+=1;
         break;
       case "d": //3
-        alphabetTable[3] += timeCalTable[i];
+        alphabetTimeTable[3] += timeCalTable[i];
+        alphabetTable[3]+=1;
         break;
       case "e": //4
-        alphabetTable[4] += timeCalTable[i];
+        alphabetTimeTable[4] += timeCalTable[i];
+        alphabetTable[4]+=1;
         break;
       case "f": //5
-        alphabetTable[5] += timeCalTable[i];
+        alphabetTimeTable[5] += timeCalTable[i];
+        alphabetTable[5]+=1;
         break;
       case "g": //6
-        alphabetTable[6] += timeCalTable[i];
+        alphabetTimeTable[6] += timeCalTable[i];
+        alphabetTable[6]+=1;
         break;
       case "h": //7
-        alphabetTable[7] += timeCalTable[i];
+        alphabetTimeTable[7] += timeCalTable[i];
+        alphabetTable[7]+=1;
         break;
       case "i": //8
-        alphabetTable[8] += timeCalTable[i];
+        alphabetTimeTable[8] += timeCalTable[i];
+        alphabetTable[8]+=1;
         break;
       case "j": //9
-        alphabetTable[9] += timeCalTable[i];
+        alphabetTimeTable[9] += timeCalTable[i];
+        alphabetTable[9]+=1;
         break;
       case "k": //10
-        alphabetTable[10] += timeCalTable[i];
+        alphabetTimeTable[10] += timeCalTable[i];
+        alphabetTable[10]+=1;
         break;
       case "l": //11
-        alphabetTable[11] += timeCalTable[i];
+        alphabetTimeTable[11] += timeCalTable[i];
+        alphabetTable[11]+=1;
         break;
       case "m": //12
-        alphabetTable[12] += timeCalTable[i];
+        alphabetTimeTable[12] += timeCalTable[i];
+        alphabetTable[12]+=1;
         break;
       case "n": //13
-        alphabetTable[13] += timeCalTable[i];
+        alphabetTimeTable[13] += timeCalTable[i];
+        alphabetTable[13]+=1;
         break;
       case "o": //14
-        alphabetTable[14] += timeCalTable[i];
+        alphabetTimeTable[14] += timeCalTable[i];
+        alphabetTable[14]+=1;
         break;
       case "p": //15
-        alphabetTable[15] += timeCalTable[i];
+        alphabetTimeTable[15] += timeCalTable[i];
+        alphabetTable[15]+=1;
         break;
       case "q": //16
-        alphabetTable[16] += timeCalTable[i];
+        alphabetTimeTable[16] += timeCalTable[i];
+        alphabetTable[16]+=1;
         break;
       case "r": //17
-        alphabetTable[17] += timeCalTable[i];
+        alphabetTimeTable[17] += timeCalTable[i];
+        alphabetTable[17]+=1;
         break;
       case "s": //18
-        alphabetTable[18] += timeCalTable[i];
+        alphabetTimeTable[18] += timeCalTable[i];
+        alphabetTable[18]+=1;
         break;
       case "t": //19
-        alphabetTable[19] += timeCalTable[i];
+        alphabetTimeTable[19] += timeCalTable[i];
+        alphabetTable[19]+=1;
         break;
       case "u": //20
-        alphabetTable[20] += timeCalTable[i];
+        alphabetTimeTable[20] += timeCalTable[i];
+        alphabetTable[20]+=1;
         break;
       case "v": //21
-        alphabetTable[21] += timeCalTable[i];
+        alphabetTimeTable[21] += timeCalTable[i];
+        alphabetTable[21]+=1;
         break;
       case "w": //22
-        alphabetTable[22] += timeCalTable[i];
+        alphabetTimeTable[22] += timeCalTable[i];
+        alphabetTable[22]+=1;
         break;
       case "x": //23
-        alphabetTable[23] += timeCalTable[i];
+        alphabetTimeTable[23] += timeCalTable[i];
+        alphabetTable[23]+=1;
         break;
       case "y": //24
-        alphabetTable[24] += timeCalTable[i];
+        alphabetTimeTable[24] += timeCalTable[i];
+        alphabetTable[24]+=1;
         break;
       case "z": //25
-        alphabetTable[25] += timeCalTable[i];
+        alphabetTimeTable[25] += timeCalTable[i];
+        alphabetTable[25]+=1;
         break;
       default: //space
         break;
     }
   }
   console.log(alphabetTable);
+  console.log(alphabetTimeTable);
 };
 
 let startTime, timerInterval;
