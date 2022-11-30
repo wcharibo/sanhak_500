@@ -129,8 +129,3 @@ body,.word-display, .word-input{
     background-color: #ffe4c4;
     border-radius: 0.5rem;
   }
-
-  .timerTime:checked{
-    background-color: #ffe4c4;
-    border-radius: 0.5rem;
-  }

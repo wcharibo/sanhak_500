@@ -12,7 +12,7 @@ let errCnt = 0;
 let backspaceCnt = 0;
 let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
-let alphabetTable = new Array(); //오타 수와 입력시간 기록할 테이블
+let alphabetTable = new Array(); //입력시간 기록할 테이블
 
 import { wordData } from "./wordList.js";
 
@@ -98,6 +98,17 @@ wordInputElement.addEventListener("input", () => {
   arrayWord = wordDisplayElement.querySelectorAll("span");
   arrayValue = wordInputElement.value.split("");
   let key;
+  if (timeTable[arrayValue.length]!= null) {  //backspace로 이전 문자로 되돌아갔을 때 새로 시간 받아오는 것을 막음
+    return;
+  }
+  else if(arrayWord[arrayValue.length-1].innerText==arrayValue[arrayValue.length-1]){
+    timeTable[arrayValue.length - 1] = new Date();
+    timeTable[arrayValue.length - 1] = timeTable[arrayValue.length - 1].getTime();
+  }
+  else{
+    timeTable[arrayValue.length -1] = 0;
+  }
+  
   // console.log(arrayValue);//이게 키포인트 인듯
   // console.log(arrayWord[arrayValue.length-1].innerText);
   let correct = true;
@@ -113,9 +124,6 @@ wordInputElement.addEventListener("input", () => {
     } else if (character == " " && characterSpan.innerText == " ") {
       characterSpan.classList.add("space");
     } else if (character === characterSpan.innerText) {
-      timeTable[arrayValue.length - 1] = new Date();
-      timeTable[arrayValue.length - 1] =
-        timeTable[arrayValue.length - 1].getTime();
       characterSpan.classList.add("correct");
       characterSpan.classList.remove("incorrect");
     }
@@ -182,7 +190,7 @@ const wordTime = () => {
   // console.log(arrayValue);
 };
 
-const calAlphabetTable = () => {
+const calAlphabetTable = () => {//입력시간이 앞의 문자에 저장됨
   for (let i = 0; i < 26; i++) {
     alphabetTable[i] = 0;
   }
