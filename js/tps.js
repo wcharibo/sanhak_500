@@ -9,7 +9,7 @@ let arrayWord = wordDisplayElement.querySelectorAll("span");
 let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
 let errCnt = 0;
-let backspaceCnt = 0;
+let wpm = 0;
 let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
 let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
@@ -53,11 +53,13 @@ function getPractice() {
 const getResult = () => {
   //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
   startTimer(0);
+  getTypingSpeed();
   resultDisplayElement.style.display = "block";
   wordDisplayElement.style.display = "none";
   wordInputElement.style.display = "none";
-  let result = `${errCnt} wrong word`;
+  let result = `${errCnt} wrong word \n typing speed: ${wpm}wpm`;
   resultDisplayElement.innerHTML = result;
+
 };
 
 function getRandomQuote() {
@@ -98,7 +100,6 @@ wordInputElement.addEventListener("input", () => {
   //인풋 이벤트 발생할 때마다 입력된 글자와 비교하여 색 wordDisplay에 색표시
   arrayWord = wordDisplayElement.querySelectorAll("span");
   arrayValue = wordInputElement.value.split("");
-  console.log(arrayValue.length);
   let key;
   if (arrayValue.length != 0) {
     if (timeTable[arrayValue.length] != null && arrayWord[arrayValue.length - 1].className == "correct") {
@@ -188,9 +189,6 @@ const wordTime = () => {
   for (let i = 1; i < arrayValue.length; i++) {
     timeCalTable[i] = timeTable[i] - timeTable[i - 1];
   }
-  console.log(timeTable);
-  console.log(timeCalTable);
-  console.log(arrayValue);
 };
 
 const calAlphabetTable = () => {
@@ -310,7 +308,6 @@ const calAlphabetTable = () => {
     }
   }
   console.log(alphabetTable);
-  console.log(alphabetTimeTable);
   for (let i = 0; i < 26; i++) {
     if (alphabetTable[i] == 0) return;
     alphabetTimeTable[i] = alphabetTimeTable[i] / alphabetTable[i];
@@ -327,7 +324,6 @@ const startTimer = (i) => {
     timerInterval = setInterval(() => {
       timerElement.innerText = practiceTime - getTimerTime();
       if (timerElement.innerText == 0) {
-        console.log(timeTable[-1]);
         countError();
         getResult();
         wordTime();
@@ -346,5 +342,11 @@ const getTimerTime = () => {
   //연습을 시작한 시간에서 현재 시간을 빼주는 함수
   return Math.floor((new Date() - startTime) / 1000);
 };
+
+const getTypingSpeed = () => {
+  //타이핑 속도 가져오는 함수
+  wpm = (arrayValue.length/5)*(arrayValue.length/(arrayValue.length+errCnt))*60/practiceTime;
+  wpm = Math.floor(wpm);
+}
 
 getPractice();
