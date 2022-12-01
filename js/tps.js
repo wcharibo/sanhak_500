@@ -15,6 +15,34 @@ let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
 let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
 let alphabetTable = new Array(); //입력된 알파벳 개수 기록할 테이블
 let alphabetErrorTable = new Array(); //알파벳 별로 오타 카운트
+let alphabet = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
 
 import { wordData } from "./wordList.js";
 
@@ -142,20 +170,6 @@ wordInputElement.addEventListener("input", () => {
       characterSpan.classList.add("correct");
       characterSpan.classList.remove("incorrect");
     }
-    // else if(arrayValue.length>=3){
-    //     if(character != characterSpan.innerText && arrayWord[arrayValue.length-3].className=='fixed incorrect'){
-    //         characterSpan.classList.add('incorrect');
-    //     }
-    //     else if(character != characterSpan.innerText && arrayWord[arrayValue.length-3].className=='incorrect'){
-    //         characterSpan.classList.add('incorrect');
-    //     }
-    //     else if(character != characterSpan.innerText && arrayWord[arrayValue.length-2].className=='correct'){
-    //         characterSpan.classList.remove('correct');
-    //         characterSpan.classList.add('incorrect');
-    //         characterSpan.classList.add('fixed')
-    //         correct = false;
-    //     }
-    // }
     else {
       characterSpan.classList.remove("correct");
       characterSpan.classList.add("incorrect");
@@ -436,6 +450,7 @@ const startTimer = (i) => {
         let max = Math.max(...alphabetTimeTable);
         console.log(alphabetTimeTable.indexOf(max));
         console.log(alphabetTimeTable);
+        console.log(alphabet[alphabetTimeTable.indexOf(max)]);
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {
