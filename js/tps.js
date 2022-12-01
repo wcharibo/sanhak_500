@@ -46,7 +46,7 @@ let alphabet = [
 
 import { wordData } from "./wordList.js";
 
-function randomWord() {
+const getRandomWord = () => {
   //랜덤 연습모드를 위한 단어 랜덤하게 가져오기
   let random = Math.floor(Math.random() * (10000 - 1) + 1);
   let arr = wordData[random];
@@ -55,7 +55,11 @@ function randomWord() {
     arr = arr + " " + wordData[random];
   }
   return arr;
-}
+};
+
+const getRecommendWord = () => {
+  let targetWord = alphabet[alphabetTimeTable.indexOf(max)];
+};
 
 setTimer.forEach((timer) => {
   //연습시간 설정
@@ -67,9 +71,9 @@ setTimer.forEach((timer) => {
   });
 });
 
-function getPractice() {
+const getRandomPractice = () => {
   //모드에 따라 가져오 단어 분리하기
-  const word = randomWord();
+  const word = getRandomWord();
   wordDisplayElement.innerText = "";
   word.split("").forEach((character) => {
     const characterSpan = document.createElement("span");
@@ -77,7 +81,9 @@ function getPractice() {
     wordDisplayElement.appendChild(characterSpan);
   });
   wordInputElement.value = null;
-}
+};
+
+const getRecommendTest = () => { };
 
 const getResult = () => {
   //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
@@ -128,13 +134,13 @@ wordInputElement.addEventListener("input", () => {
   //인풋 이벤트 발생할 때마다 입력된 글자와 비교하여 색 wordDisplay에 색표시
   arrayWord = wordDisplayElement.querySelectorAll("span");
   arrayValue = wordInputElement.value.split("");
-  let key;
   if (arrayValue.length != 0) {
     if (
       timeTable[arrayValue.length] != null &&
       arrayWord[arrayValue.length - 1].className == "correct"
     ) {
       //backspace로 이전 문자로 되돌아갔을 때 새로 시간 받아오는 것을 막음
+      //
     } else if (
       arrayWord[arrayValue.length - 1].innerText ==
       arrayValue[arrayValue.length - 1]
@@ -149,17 +155,12 @@ wordInputElement.addEventListener("input", () => {
     errCnt = 0;
     timeTable = new Array();
     timeCalTable = new Array();
-    getPractice();
+    getRandomPractice();
   }
 
-  // console.log(arrayValue);//이게 키포인트 인듯
-  // console.log(arrayWord[arrayValue.length-1].innerText);
   let correct = true;
   arrayWord.forEach((characterSpan, index) => {
     const character = arrayValue[index];
-    // wordInputElement.addEventListener('keydown', (event)=>{
-    //     key = event.keyCode;
-    // })
     if (character == null) {
       characterSpan.classList.remove("correct");
       characterSpan.classList.remove("incorrect");
@@ -169,8 +170,7 @@ wordInputElement.addEventListener("input", () => {
     } else if (character === characterSpan.innerText) {
       characterSpan.classList.add("correct");
       characterSpan.classList.remove("incorrect");
-    }
-    else {
+    } else {
       characterSpan.classList.remove("correct");
       characterSpan.classList.add("incorrect");
       characterSpan.classList.add("fixed");
@@ -197,7 +197,7 @@ restartElement.addEventListener("click", () => {
   errCnt = 0;
   timeTable = new Array();
   timeCalTable = new Array();
-  getPractice();
+  getRandomPractice();
 });
 
 const countError = () => {
@@ -474,4 +474,4 @@ const getTypingSpeed = () => {
   wpm = Math.floor(wpm);
 };
 
-getPractice();
+getRandomPractice();
