@@ -117,7 +117,12 @@ wordInputElement.addEventListener("input", () => {
     } else {
       timeTable[arrayValue.length - 1] = 0;
     }
-  } else timeTable[arrayValue.length] = 0;
+  } else {
+    errCnt = 0;
+    timeTable = new Array();
+    timeCalTable = new Array();
+    getPractice();
+  }
 
   // console.log(arrayValue);//이게 키포인트 인듯
   // console.log(arrayWord[arrayValue.length-1].innerText);
@@ -320,7 +325,6 @@ const calAlphabetTable = () => {
     if (alphabetTable[i] == 0) return;
     alphabetTimeTable[i] = alphabetTimeTable[i] / alphabetTable[i];
   }
-  console.log(alphabetTimeTable);
 };
 
 let alphabetError = () => {
@@ -431,7 +435,7 @@ const startTimer = (i) => {
         alphabetError();
         let max = Math.max(...alphabetTimeTable);
         console.log(alphabetTimeTable.indexOf(max));
-        console.log(alphabetErrorTable);
+        console.log(alphabetTimeTable);
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {
