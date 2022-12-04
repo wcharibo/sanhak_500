@@ -142,6 +142,8 @@ body,
     left: -30%;
 }
 
+
+
 .timerTime input[name=timer] {
     vertical-align: middle;
     appearance: none;
@@ -213,3 +215,9 @@ a.button {
 }
 
 /* Mode Select */
+
+/*worst word display*/
+.worst-word-display{
+    font-size: 30px;
+    text-align: center;
+}

@@ -5,12 +5,13 @@ const timerElement = document.querySelector("#timer");
 const restartElement = document.querySelector("#restartBtn");
 const resultDisplayElement = document.querySelector("#resultDisplay");
 const setTimer = document.querySelectorAll("input[name=timer]");
+const worstWordDisplayElement = document.querySelector("#worstWordDisplay");
 let arrayWord = wordDisplayElement.querySelectorAll("span");
 let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
 let errCnt = 0;
 let wpm = 0;
-let targetQuote = 'e';
+let targetLetter = 'e';
 let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
 let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
@@ -64,17 +65,17 @@ const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져�
   let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
   const findFirstWorstWord = (element) => {
-    if (element[0] == targetQuote) return true;
+    if (element[0] == targetLetter) return true;
   };
   const findWorstWord = (element) => {
     for (let i = 0; i < element.length; i++) {
-      if (element[i] == targetQuote) {
+      if (element[i] == targetLetter) {
         return true;
       }
     }
   };
 
-  if (targetQuote) {
+  if (targetLetter) {
     let sizeOfWord = wordData.filter(findFirstWorstWord).length;
     let worstWord;
     if (sizeOfWord >= 300) {
@@ -126,6 +127,8 @@ const getRecommendPractice = () => {
   });
   wordInputElement.value = null;
 };
+
+worstWordDisplayElement.innerHTML = `취약문자 '${targetLetter }'`;
 
 const getResult = () => {
   //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
@@ -490,7 +493,7 @@ const startTimer = (i) => {
         calAlphabetTable();
         alphabetError();
         let max = Math.max(...alphabetTimeTable);
-        targetQuote = alphabet[alphabetTimeTable.indexOf(max)];
+        targetLetter = alphabet[alphabetTimeTable.indexOf(max)];
         console.log(alphabetTimeTable.indexOf(max));
         console.log(alphabetTimeTable);
         console.log(alphabet[alphabetTimeTable.indexOf(max)]);
