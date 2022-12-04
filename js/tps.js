@@ -10,7 +10,7 @@ let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
 let errCnt = 0;
 let wpm = 0;
-let targetQuote ='e';
+let targetQuote = 'e';
 let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
 let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
@@ -63,11 +63,16 @@ const getRandomWord = () => {
 const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져오기 (데이터가 없으면 random으로 가져오기)
   let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
-    
+
   if (targetQuote) {
     const findWorstWord = (element) => {
-      if (element[0] == targetQuote) return true;
+      for (let i = 0; i < element.length; i++) {
+        if (element[i] == targetQuote) {
+          return true;
+        }
+      }
     };
+
     let worstWord = '';
     worstWord = wordData.filter(findWorstWord);
     console.log(worstWord);
@@ -76,8 +81,7 @@ const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져�
       arr = arr + " " + worstWord[random];
     }
   }
-  else {arr = getRandomWord();}
-
+  else { arr = getRandomWord(); }
 
   return arr;
 };
@@ -104,7 +108,7 @@ const getRandomPractice = () => {
   wordInputElement.value = null;
 };
 
-const getRecommendPractice = () => { 
+const getRecommendPractice = () => {
   const word = getRecommendWord();
   wordDisplayElement.innerText = "";
   word.split("").forEach((character) => {
