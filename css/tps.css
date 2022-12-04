@@ -108,11 +108,26 @@ body,
     font-weight: bold;
     background-color: beige;
 }
+/*Practice Setting*/
+.practiceSetting{
+    position: absolute;
+    display: flex;
+    top: 6rem;
+}
 
 /* Time Select */
+.timerContainer {
+    position: relative;
+    left: 45%;
+}
+.selectTime{
+    position: relative;
+    text-align: center;
+    float: left;
+}
+
 .timerTimes {
-    position: absolute;
-    top: 6rem;
+    position: relative;
     text-align: center;
 }
 
@@ -120,7 +135,8 @@ body,
     position: relative;
     font-size: 20px;
     line-height: 2rem;
-    padding: 0.2em 0.4em;
+    padding: 0.2em 0.3em;
+    float: left;
 }
 
 .timerTime input[name=timer] {
@@ -145,6 +161,7 @@ a.button {
     display: block;
     position: relative;
     float: left;
+    top: 5rem;
     width: 120px;
     padding: 0;
     margin: 10px 20px 10px 0;

@@ -10,6 +10,7 @@ let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
 let errCnt = 0;
 let wpm = 0;
+let targetQuote ='e';
 let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
 let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
@@ -48,17 +49,37 @@ import { wordData } from "./wordList.js";
 
 const getRandomWord = () => {
   //랜덤 연습모드를 위한 단어 랜덤하게 가져오기
-  let random = Math.floor(Math.random() * (10000 - 1) + 1);
+  let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
+  console.log('Random')
   for (let i = 0; i < 20; i++) {
-    random = Math.floor(Math.random() * (10000 - 1) + 1);
+    random = Math.floor(Math.random() * (wordData.length - 1) + 1);
     arr = arr + " " + wordData[random];
-  }
+    console.log(arr);
+  };
   return arr;
 };
 
-const getRecommendWord = () => {
-  let targetWord = alphabet[alphabetTimeTable.indexOf(max)];
+const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져오기 (데이터가 없으면 random으로 가져오기)
+  let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
+  let arr = wordData[random];
+    
+  if (targetQuote) {
+    const findWorstWord = (element) => {
+      if (element[0] == targetQuote) return true;
+    };
+    let worstWord = '';
+    worstWord = wordData.filter(findWorstWord);
+    console.log(worstWord);
+    for (let i = 0; i < 20; i++) {
+      random = Math.floor(Math.random() * (worstWord.length - 1) + 1);
+      arr = arr + " " + worstWord[random];
+    }
+  }
+  else {arr = getRandomWord();}
+
+
+  return arr;
 };
 
 setTimer.forEach((timer) => {
@@ -83,7 +104,16 @@ const getRandomPractice = () => {
   wordInputElement.value = null;
 };
 
-const getRecommendTest = () => { };
+const getRecommendPractice = () => { 
+  const word = getRecommendWord();
+  wordDisplayElement.innerText = "";
+  word.split("").forEach((character) => {
+    const characterSpan = document.createElement("span");
+    characterSpan.innerText = character;
+    wordDisplayElement.appendChild(characterSpan);
+  });
+  wordInputElement.value = null;
+};
 
 const getResult = () => {
   //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
@@ -197,7 +227,7 @@ restartElement.addEventListener("click", () => {
   errCnt = 0;
   timeTable = new Array();
   timeCalTable = new Array();
-  getRandomPractice();
+  getRecommendPractice();
 });
 
 const countError = () => {
@@ -448,6 +478,7 @@ const startTimer = (i) => {
         calAlphabetTable();
         alphabetError();
         let max = Math.max(...alphabetTimeTable);
+        targetQuote = alphabet[alphabetTimeTable.indexOf(max)];
         console.log(alphabetTimeTable.indexOf(max));
         console.log(alphabetTimeTable);
         console.log(alphabet[alphabetTimeTable.indexOf(max)]);
@@ -474,4 +505,5 @@ const getTypingSpeed = () => {
   wpm = Math.floor(wpm);
 };
 
-getRandomPractice();
+getRecommendPractice();
+// getRandomPractice();
