@@ -84,7 +84,7 @@ const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져�
       worstWord = wordData.filter(findWorstWord);
     }
     console.log(worstWord);
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 30; i++) {
       random = Math.floor(Math.random() * (worstWord.length - 1) + 1);
       arr = arr + " " + worstWord[random];
     }
