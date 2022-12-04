@@ -63,18 +63,26 @@ const getRandomWord = () => {
 const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져오기 (데이터가 없으면 random으로 가져오기)
   let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
+  const findFirstWorstWord = (element) => {
+    if (element[0] == targetQuote) return true;
+  };
+  const findWorstWord = (element) => {
+    for (let i = 0; i < element.length; i++) {
+      if (element[i] == targetQuote) {
+        return true;
+      }
+    }
+  };
 
   if (targetQuote) {
-    const findWorstWord = (element) => {
-      for (let i = 0; i < element.length; i++) {
-        if (element[i] == targetQuote) {
-          return true;
-        }
-      }
-    };
-
-    let worstWord = '';
-    worstWord = wordData.filter(findWorstWord);
+    let sizeOfWord = wordData.filter(findFirstWorstWord).length;
+    let worstWord;
+    if (sizeOfWord >= 300) {
+      worstWord = wordData.filter(findFirstWorstWord);
+    }
+    else {
+      worstWord = wordData.filter(findWorstWord);
+    }
     console.log(worstWord);
     for (let i = 0; i < 20; i++) {
       random = Math.floor(Math.random() * (worstWord.length - 1) + 1);
