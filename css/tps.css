@@ -66,6 +66,11 @@ body,
     border-color: black;
 }
 
+.word-input::placeholder{
+    text-align: center;
+    font-size: 15px;
+}
+
 .correct {
     color: green;
 }
