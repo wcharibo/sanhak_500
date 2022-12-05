@@ -1,10 +1,15 @@
 {
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "app-root-path": "^3.1.0",
+>>>>>>> 7dcbefe48ecb63333c30afaea5c5c4ff34074ab3
     "body-parser": "^1.20.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "mysql": "^2.18.1",
+<<<<<<< HEAD
     "nodemon": "^2.0.20",
     "openai": "^3.1.0"
   },
@@ -13,12 +18,31 @@
   "main": "app.js",
   "bin": {
     "tpdb": "bin/www.js"
+=======
+    "winston": "^3.8.2"
+  },
+  "name": "login",
+  "version": "1.0.0",
+  "main": "app.js",
+  "bin": {
+    "login": "bin/www.js"
+>>>>>>> 7dcbefe48ecb63333c30afaea5c5c4ff34074ab3
   },
   "scripts": {
     "start": "nodemon ./bin/www.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+<<<<<<< HEAD
   "author": "Team_500",
   "license": "MIT",
   "description": ""
+=======
+  "author": "Team500",
+  "license": "MIT",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+>>>>>>> 7dcbefe48ecb63333c30afaea5c5c4ff34074ab3
 }
