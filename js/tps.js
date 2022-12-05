@@ -5,29 +5,97 @@ const timerElement = document.querySelector("#timer");
 const restartElement = document.querySelector("#restartBtn");
 const resultDisplayElement = document.querySelector("#resultDisplay");
 const setTimer = document.querySelectorAll("input[name=timer]");
+const worstWordDisplayElement = document.querySelector("#worstWordDisplay");
 let arrayWord = wordDisplayElement.querySelectorAll("span");
 let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
 let errCnt = 0;
 let wpm = 0;
+let targetLetter = 'e';
 let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
 let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
 let alphabetTable = new Array(); //입력된 알파벳 개수 기록할 테이블
 let alphabetErrorTable = new Array(); //알파벳 별로 오타 카운트
+let alphabet = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
+//sample
+let sampleTimeData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
+let sampleErrorData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
+let sampleCnt = 0;
 
 import { wordData } from "./wordList.js";
 
-function randomWord() {
+const getRandomWord = () => {
   //랜덤 연습모드를 위한 단어 랜덤하게 가져오기
-  let random = Math.floor(Math.random() * (10000 - 1) + 1);
+  let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
   for (let i = 0; i < 20; i++) {
-    random = Math.floor(Math.random() * (10000 - 1) + 1);
+    random = Math.floor(Math.random() * (wordData.length - 1) + 1);
     arr = arr + " " + wordData[random];
-  }
+  };
   return arr;
-}
+};
+
+const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져오기 (데이터가 없으면 random으로 가져오기)
+  let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
+  let arr = wordData[random];
+  const findFirstWorstWord = (element) => {
+    if (element[0] == targetLetter) return true;
+  };
+  const findWorstWord = (element) => {
+    for (let i = 0; i < element.length; i++) {
+      if (element[i] == targetLetter) {
+        return true;
+      }
+    }
+  };
+
+  if (targetLetter) {
+    let sizeOfWord = wordData.filter(findFirstWorstWord).length;
+    let worstWord;
+    if (sizeOfWord >= 300) {
+      worstWord = wordData.filter(findFirstWorstWord);
+    }
+    else {
+      worstWord = wordData.filter(findWorstWord);
+    }
+    // console.log(worstWord);
+    for (let i = 0; i < 30; i++) {
+      random = Math.floor(Math.random() * (worstWord.length - 1) + 1);
+      arr = arr + " " + worstWord[random];
+    }
+  }
+  else { arr = getRandomWord(); }
+
+  return arr;
+};
 
 setTimer.forEach((timer) => {
   //연습시간 설정
@@ -39,9 +107,9 @@ setTimer.forEach((timer) => {
   });
 });
 
-function getPractice() {
+const getRandomPractice = () => {
   //모드에 따라 가져오 단어 분리하기
-  const word = randomWord();
+  const word = getRandomWord();
   wordDisplayElement.innerText = "";
   word.split("").forEach((character) => {
     const characterSpan = document.createElement("span");
@@ -49,7 +117,20 @@ function getPractice() {
     wordDisplayElement.appendChild(characterSpan);
   });
   wordInputElement.value = null;
-}
+};
+
+const getRecommendPractice = () => {
+  const word = getRecommendWord();
+  wordDisplayElement.innerText = "";
+  word.split("").forEach((character) => {
+    const characterSpan = document.createElement("span");
+    characterSpan.innerText = character;
+    wordDisplayElement.appendChild(characterSpan);
+  });
+  wordInputElement.value = null;
+};
+
+worstWordDisplayElement.innerHTML = `취약문자 '${targetLetter }'`;
 
 const getResult = () => {
   //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
@@ -83,8 +164,8 @@ async function renderNewQuote() {
 }
 
 wordInputElement.addEventListener("focus", () => {
-  //input focus->start timer, input unfocused->stop timer and reset
-  startTimer(1);
+  // input focus->start timer, input unfocused->stop timer and reset
+  // startTimer(1);
   wordInputElement.addEventListener("blur", () => {
     startTimer(0);
     wordInputElement.value = "";
@@ -100,13 +181,14 @@ wordInputElement.addEventListener("input", () => {
   //인풋 이벤트 발생할 때마다 입력된 글자와 비교하여 색 wordDisplay에 색표시
   arrayWord = wordDisplayElement.querySelectorAll("span");
   arrayValue = wordInputElement.value.split("");
-  let key;
+  if(arrayValue.length==1&&timeTable[arrayValue.length]==null) startTimer(1);
   if (arrayValue.length != 0) {
     if (
       timeTable[arrayValue.length] != null &&
       arrayWord[arrayValue.length - 1].className == "correct"
     ) {
       //backspace로 이전 문자로 되돌아갔을 때 새로 시간 받아오는 것을 막음
+      //
     } else if (
       arrayWord[arrayValue.length - 1].innerText ==
       arrayValue[arrayValue.length - 1]
@@ -117,16 +199,16 @@ wordInputElement.addEventListener("input", () => {
     } else {
       timeTable[arrayValue.length - 1] = 0;
     }
-  } else timeTable[arrayValue.length] = 0;
+  } else {
+    errCnt = 0;
+    timeTable = new Array();
+    timeCalTable = new Array();
+    getRandomPractice();
+  }
 
-  // console.log(arrayValue);//이게 키포인트 인듯
-  // console.log(arrayWord[arrayValue.length-1].innerText);
   let correct = true;
   arrayWord.forEach((characterSpan, index) => {
     const character = arrayValue[index];
-    // wordInputElement.addEventListener('keydown', (event)=>{
-    //     key = event.keyCode;
-    // })
     if (character == null) {
       characterSpan.classList.remove("correct");
       characterSpan.classList.remove("incorrect");
@@ -136,22 +218,7 @@ wordInputElement.addEventListener("input", () => {
     } else if (character === characterSpan.innerText) {
       characterSpan.classList.add("correct");
       characterSpan.classList.remove("incorrect");
-    }
-    // else if(arrayValue.length>=3){
-    //     if(character != characterSpan.innerText && arrayWord[arrayValue.length-3].className=='fixed incorrect'){
-    //         characterSpan.classList.add('incorrect');
-    //     }
-    //     else if(character != characterSpan.innerText && arrayWord[arrayValue.length-3].className=='incorrect'){
-    //         characterSpan.classList.add('incorrect');
-    //     }
-    //     else if(character != characterSpan.innerText && arrayWord[arrayValue.length-2].className=='correct'){
-    //         characterSpan.classList.remove('correct');
-    //         characterSpan.classList.add('incorrect');
-    //         characterSpan.classList.add('fixed')
-    //         correct = false;
-    //     }
-    // }
-    else {
+    } else {
       characterSpan.classList.remove("correct");
       characterSpan.classList.add("incorrect");
       characterSpan.classList.add("fixed");
@@ -166,7 +233,6 @@ wordInputElement.addEventListener("input", () => {
     getResult();
     wordTime();
     console.log(`${errCnt} error detected`);
-    console.log(arrayWord);
   } //renderNewQuote()
 });
 
@@ -175,10 +241,11 @@ restartElement.addEventListener("click", () => {
   resultDisplayElement.style.display = "none";
   wordDisplayElement.style.display = "block";
   wordInputElement.style.display = "block";
+  wordInputElement.focus();
   errCnt = 0;
   timeTable = new Array();
   timeCalTable = new Array();
-  getPractice();
+  getRecommendPractice();
 });
 
 const countError = () => {
@@ -204,6 +271,9 @@ const calAlphabetTable = () => {
     alphabetTimeTable[i] = 0;
     alphabetTable[i] = 0;
     alphabetErrorTable[i] = 0;
+    // sample
+    sampleErrorData[sampleCnt]= new Array();
+    sampleTimeData[sampleCnt]= new Array();
   }
   for (let i = 0; i < arrayValue.length; i++) {
     switch (arrayValue[i]) {
@@ -315,12 +385,11 @@ const calAlphabetTable = () => {
         break;
     }
   }
-  console.log(alphabetTable);
+  
   for (let i = 0; i < 26; i++) {
     if (alphabetTable[i] == 0) return;
     alphabetTimeTable[i] = alphabetTimeTable[i] / alphabetTable[i];
   }
-  console.log(alphabetTimeTable);
 };
 
 let alphabetError = () => {
@@ -424,14 +493,24 @@ const startTimer = (i) => {
     timerInterval = setInterval(() => {
       timerElement.innerText = practiceTime - getTimerTime();
       if (timerElement.innerText == 0) {
+        startTimer(0);
         countError();
         getResult();
         wordTime();
         calAlphabetTable();
         alphabetError();
         let max = Math.max(...alphabetTimeTable);
+        targetLetter = alphabet[alphabetTimeTable.indexOf(max)];
         console.log(alphabetTimeTable.indexOf(max));
-        console.log(alphabetErrorTable);
+        console.log(alphabetTimeTable);
+        console.log(alphabet[alphabetTimeTable.indexOf(max)]);
+        for (let i = 0; i < 26; i++) {
+          sampleTimeData[sampleCnt][i] = alphabetTimeTable[i];
+          sampleErrorData[sampleCnt][i] = alphabetErrorTable[i];
+        }
+        console.log(sampleTimeData);
+        console.log(sampleErrorData);
+        sampleCnt++;
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {
@@ -455,4 +534,5 @@ const getTypingSpeed = () => {
   wpm = Math.floor(wpm);
 };
 
-getPractice();
+getRecommendPractice();
+// getRandomPractice();
