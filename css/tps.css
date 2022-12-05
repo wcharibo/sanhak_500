@@ -19,11 +19,13 @@ body,
 }
 
 .container {
+    position: relative;
     background-color: #ffe4c4;
     padding: 1rem;
     border-radius: .5rem;
     width: 700px;
     max-width: 90%;
+    top: 4rem;
 }
 
 .timer {
@@ -67,7 +69,7 @@ body,
 }
 
 .word-input::placeholder{
-    text-align: center;
+    color: #38240c;
     font-size: 15px;
 }
 

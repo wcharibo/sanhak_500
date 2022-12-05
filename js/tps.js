@@ -162,8 +162,8 @@ async function renderNewQuote() {
 }
 
 wordInputElement.addEventListener("focus", () => {
-  //input focus->start timer, input unfocused->stop timer and reset
-  startTimer(1);
+  // input focus->start timer, input unfocused->stop timer and reset
+  // startTimer(1);
   wordInputElement.addEventListener("blur", () => {
     startTimer(0);
     wordInputElement.value = "";
@@ -179,6 +179,7 @@ wordInputElement.addEventListener("input", () => {
   //인풋 이벤트 발생할 때마다 입력된 글자와 비교하여 색 wordDisplay에 색표시
   arrayWord = wordDisplayElement.querySelectorAll("span");
   arrayValue = wordInputElement.value.split("");
+  if(arrayValue.length==1&&timeTable[arrayValue.length]==null) startTimer(1);
   if (arrayValue.length != 0) {
     if (
       timeTable[arrayValue.length] != null &&
@@ -239,6 +240,7 @@ restartElement.addEventListener("click", () => {
   resultDisplayElement.style.display = "none";
   wordDisplayElement.style.display = "block";
   wordInputElement.style.display = "block";
+  wordInputElement.focus();
   errCnt = 0;
   timeTable = new Array();
   timeCalTable = new Array();
@@ -487,6 +489,7 @@ const startTimer = (i) => {
     timerInterval = setInterval(() => {
       timerElement.innerText = practiceTime - getTimerTime();
       if (timerElement.innerText == 0) {
+        startTimer(0);
         countError();
         getResult();
         wordTime();
