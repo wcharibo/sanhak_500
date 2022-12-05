@@ -45,6 +45,10 @@ let alphabet = [
   "y",
   "z",
 ];
+//sample
+let sampleTimeData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
+let sampleErrorData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
+let sampleCnt = 0;
 
 import { wordData } from "./wordList.js";
 
@@ -52,11 +56,9 @@ const getRandomWord = () => {
   //랜덤 연습모드를 위한 단어 랜덤하게 가져오기
   let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
-  console.log('Random')
   for (let i = 0; i < 20; i++) {
     random = Math.floor(Math.random() * (wordData.length - 1) + 1);
     arr = arr + " " + wordData[random];
-    console.log(arr);
   };
   return arr;
 };
@@ -84,7 +86,7 @@ const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져�
     else {
       worstWord = wordData.filter(findWorstWord);
     }
-    console.log(worstWord);
+    // console.log(worstWord);
     for (let i = 0; i < 30; i++) {
       random = Math.floor(Math.random() * (worstWord.length - 1) + 1);
       arr = arr + " " + worstWord[random];
@@ -231,7 +233,6 @@ wordInputElement.addEventListener("input", () => {
     getResult();
     wordTime();
     console.log(`${errCnt} error detected`);
-    console.log(arrayWord);
   } //renderNewQuote()
 });
 
@@ -270,6 +271,9 @@ const calAlphabetTable = () => {
     alphabetTimeTable[i] = 0;
     alphabetTable[i] = 0;
     alphabetErrorTable[i] = 0;
+    // sample
+    sampleErrorData[sampleCnt]= new Array();
+    sampleTimeData[sampleCnt]= new Array();
   }
   for (let i = 0; i < arrayValue.length; i++) {
     switch (arrayValue[i]) {
@@ -381,7 +385,7 @@ const calAlphabetTable = () => {
         break;
     }
   }
-  console.log(alphabetTable);
+  
   for (let i = 0; i < 26; i++) {
     if (alphabetTable[i] == 0) return;
     alphabetTimeTable[i] = alphabetTimeTable[i] / alphabetTable[i];
@@ -500,6 +504,13 @@ const startTimer = (i) => {
         console.log(alphabetTimeTable.indexOf(max));
         console.log(alphabetTimeTable);
         console.log(alphabet[alphabetTimeTable.indexOf(max)]);
+        for (let i = 0; i < 26; i++) {
+          sampleTimeData[sampleCnt][i] = alphabetTimeTable[i];
+          sampleErrorData[sampleCnt][i] = alphabetErrorTable[i];
+        }
+        console.log(sampleTimeData);
+        console.log(sampleErrorData);
+        sampleCnt++;
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {
