@@ -25,7 +25,7 @@ function login() {
     .then((res) => res.json())
     .then((res) => {
       if (res.success){
-        location.href = "../../../../tps.html";     //로그인 성공하면 타자연습 화면 출력
+        location.href = "/tps";     //로그인 성공하면 타자연습 화면 출력
       }   else {
           if (res.err) return alert(res.err);
           alert(res.msg);

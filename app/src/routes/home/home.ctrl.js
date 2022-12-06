@@ -18,6 +18,11 @@ const output = {
     logger.info(`GET /register 304 "회원가입 화면으로 이동"`);
     res.render("home/register");
   },
+
+  tps: (req, res) => {
+    logger.info(`GET /tps 304 "타이핑 화면으로 이동"`);
+    res.render("home/tps");
+  },
 };
 
 const process = {
