@@ -188,7 +188,6 @@ wordInputElement.addEventListener("input", () => {
       arrayWord[arrayValue.length - 1].className == "correct"
     ) {
       //backspace로 이전 문자로 되돌아갔을 때 새로 시간 받아오는 것을 막음
-      //
     } else if (
       arrayWord[arrayValue.length - 1].innerText ==
       arrayValue[arrayValue.length - 1]
