@@ -262,7 +262,7 @@ restartElement.addEventListener("click", () => {
   errCnt = 0;
   timeTable = new Array();
   timeCalTable = new Array();
-  getRecommendPractice();
+  getMode();
 });
 
 const countError = () => {

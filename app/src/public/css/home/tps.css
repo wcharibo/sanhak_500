@@ -46,6 +46,43 @@ body,
     padding: 0.64rem 0rem;
     font-size: 2rem;
     display: block;
+    animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    -webkit-animation: fadeIn 1s;
+    -o-animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-o-keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .word-input {
@@ -227,4 +264,5 @@ a.button {
 .worst-word-display{
     font-size: 30px;
     text-align: center;
+    display: none;
 }
