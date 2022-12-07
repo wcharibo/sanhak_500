@@ -56,15 +56,16 @@ const popupSignIn = () => {
   let pop = window.open('/login', 'SignIn', 'width = 500, height = 500');
 }
 
-randomModeElement.addEventListener('onClick', () => {
+randomModeElement.addEventListener('click', () => {
   mode = 0;
+  getMode();
+  worstWordDisplayElement.style.display = "none";
 })
-recommendModeElement.addEventListener('onClick', () => {
+recommendModeElement.addEventListener('click', () => {
   mode = 1;
+  getMode();
+  worstWordDisplayElement.style.display = "block";
 })
-
-
-
 
 
 import { wordData } from "./wordList.js";
@@ -73,7 +74,7 @@ const getRandomWord = () => {
   //랜덤 연습모드를 위한 단어 랜덤하게 가져오기
   let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 30; i++) {
     random = Math.floor(Math.random() * (wordData.length - 1) + 1);
     arr = arr + " " + wordData[random];
   };
@@ -550,9 +551,12 @@ const getTypingSpeed = () => {
   wpm = Math.floor(wpm);
 };
 
-if (mode == 1) {
-  getRecommendPractice();
-} else {
-  getRandomPractice();
-}
+const getMode = () =>{
+  if (mode == 1) {
+    getRecommendPractice();
+  } else {
+    getRandomPractice();
+  }
+};
 
+getMode();

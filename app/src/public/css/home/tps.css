@@ -20,7 +20,7 @@ body,
 
 .container {
     position: relative;
-    background-color: #ffe4c4;
+    /* background-color: #ffe4c4; */
     padding: 1rem;
     border-radius: .5rem;
     width: 700px;
