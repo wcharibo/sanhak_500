@@ -263,7 +263,16 @@ restartElement.addEventListener("click", () => {
   timeTable = new Array();
   timeCalTable = new Array();
   getMode();
+  resetAnimation();
 });
+
+const resetAnimation = ()=>{
+  const target = wordDisplayElement;
+
+  target.classList.remove('effect'),
+  void target.offsetWidth,
+  target.classList.add('effect');
+}
 
 const countError = () => {
   //잘못 입력한 문자에 fixed 클래스 추가하여 결과를 보여줄 때 fixed 클래스 카운트하는 함수
