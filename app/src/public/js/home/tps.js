@@ -10,6 +10,7 @@ const randomModeElement = document.querySelector("#randomMode");
 const recommendModeElement = document.querySelector("#recommendMode");
 const toggleButton = document.querySelector('#navbarToggleButton');
 const navMenu = document.querySelector('#navbarMenu');
+const signOutBtn = document.querySelector('#signOut');
 let arrayWord = wordDisplayElement.querySelectorAll("span");
 let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
@@ -60,7 +61,6 @@ randomModeElement.addEventListener('click', () => { //random 버튼 눌렀을 �
   getMode();
   worstWordDisplay();
   worstWordDisplayElement.style.display = "none";
-  localStorage.removeItem('accessToken'); //작동확인용 나중에 지워야함
 })
 recommendModeElement.addEventListener('click', () => {  //recommend 버튼 눌렀을 때
   if (localStorage.getItem('accessToken')) {
@@ -74,7 +74,6 @@ recommendModeElement.addEventListener('click', () => {  //recommend 버튼 눌�
     getMode();
     worstWordDisplay();
     worstWordDisplayElement.style.display = "none";
-    localStorage.removeItem('accessToken');
   }
 })
 
@@ -594,3 +593,7 @@ getMode();
 toggleButton.addEventListener('click', () => {
   navMenu.classList.toggle('active');
 });
+
+signOutBtn.addEventListener('click', ()=>{
+  localStorage.removeItem('accessToken');
+})
