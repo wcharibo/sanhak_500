@@ -160,7 +160,6 @@ const getRecommendPractice = () => {
 
 const getResult = () => {
   //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
-  startTimer(0);
   getTypingSpeed();
   resultDisplayElement.style.display = "block";
   wordDisplayElement.style.display = "none";
@@ -258,6 +257,19 @@ wordInputElement.addEventListener("input", () => {
     countError();
     getResult();
     wordTime();
+    //
+    startTimer(0);
+        countError();
+        getResult();
+        wordTime();
+        calAlphabetTable();
+        alphabetError();
+        targetLetter = getMaxError();
+        for (let i = 0; i < 26; i++) {
+          sampleTimeData[sampleCnt][i] = alphabetTimeTable[i];
+          sampleErrorData[sampleCnt][i] = alphabetErrorTable[i];
+        }
+        sampleCnt++;
     console.log(`${errCnt} error detected`);
   } //renderNewQuote()
 });
@@ -301,6 +313,11 @@ const countError = () => {
     }
   }
 };
+
+const getMaxError = () => {
+  let max = Math.max(...alphabetTimeTable);
+  return alphabet[alphabetTimeTable.indexOf(max)];
+}
 
 const wordTime = () => {
   //문자입력시간 분리
@@ -538,23 +555,16 @@ const startTimer = (i) => {
     timerInterval = setInterval(() => {
       timerElement.innerText = practiceTime - getTimerTime();
       if (timerElement.innerText == 0) {
-        startTimer(0);
-        countError();
         getResult();
+        countError();
         wordTime();
         calAlphabetTable();
         alphabetError();
-        let max = Math.max(...alphabetTimeTable);
-        targetLetter = alphabet[alphabetTimeTable.indexOf(max)];
-        console.log(alphabetTimeTable.indexOf(max));
-        console.log(alphabetTimeTable);
-        console.log(alphabet[alphabetTimeTable.indexOf(max)]);
+        targetLetter = getMaxError();
         for (let i = 0; i < 26; i++) {
           sampleTimeData[sampleCnt][i] = alphabetTimeTable[i];
           sampleErrorData[sampleCnt][i] = alphabetErrorTable[i];
         }
-        console.log(sampleTimeData);
-        console.log(sampleErrorData);
         sampleCnt++;
 
       } //if timer is 0 then stop practice and getResult
