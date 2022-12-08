@@ -228,7 +228,7 @@ wordInputElement.addEventListener("input", () => {
     errCnt = 0;
     timeTable = new Array();
     timeCalTable = new Array();
-    getRandomPractice();
+    startTimer(0);
   }
 
   let correct = true;
@@ -542,10 +542,11 @@ let alphabetError = () => {
 };
 
 let startTime, timerInterval;
-const startTimer = (i) => {
+const startTimer = (timerOn) => {
   //타이머
   timerElement.innerText = practiceTime;
-  if (i == 1) {
+  if (timerOn == 1) {
+    console.log('start');
     startTime = new Date();
     timerInterval = setInterval(() => {
       timerElement.innerText = practiceTime - getTimerTime();
@@ -561,11 +562,11 @@ const startTimer = (i) => {
           sampleErrorData[sampleCnt][i] = alphabetErrorTable[i];
         }
         sampleCnt++;
-
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {
     clearInterval(timerInterval);
+    console.log('clear');
   }
 };
 
