@@ -298,7 +298,7 @@ a.button.btnRestart{
     display: none;
     list-style: none;
     padding-left: 5px;
-    right: 10px;
+    right: 5%;
 }
 
 .navbar-menu li{
@@ -314,6 +314,50 @@ a.button.btnRestart{
     display: flex;
 }
 
+.navbar-menu.effect{
+    animation: fadeInLeft 1.5s;
+    -moz-animation: fadeInLeft 1.5s;
+    -webkit-animation: fadeInLeft 1.5s;
+    -o-animation: fadeInLeft 1.5s;
+}
+@keyframes fadeInLeft {
+    from{
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(0);
+    }
+}
+@-moz-keyframes fadeInLeft {
+    from{
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadeInLeft {
+    from{
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-o-keyframes fadeInLeft {
+    from{
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .navbar-toggleButton{
     position: absolute;
     right: 32px;
@@ -321,10 +365,4 @@ a.button.btnRestart{
     color: #007144;
 }
 
-.navbar-menu.effect{
-    animation: fadeIn 1.5s;
-    -moz-animation: fadeIn 1.5s;
-    -webkit-animation: fadeIn 1.5s;
-    -o-animation: fadeIn 1.5s;
-}
 /* navbar */
