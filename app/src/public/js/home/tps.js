@@ -54,32 +54,28 @@ let mode = 0; //0이면 random 1이면 recommend
 let sampleTimeData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
 let sampleErrorData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
 let sampleCnt = 0;
-const popupSignIn = () => {
-  let pop = window.open('/login', 'SignIn', 'width = 500, height = 500');
-}
 
-randomModeElement.addEventListener('click', () => {
+randomModeElement.addEventListener('click', () => { //random 버튼 눌렀을 때
   mode = 0;
   getMode();
   worstWordDisplay();
   worstWordDisplayElement.style.display = "none";
-  sessionStorage.removeItem('accessToken');
+  localStorage.removeItem('accessToken'); //작동확인용 나중에 지워야함
 })
-recommendModeElement.addEventListener('click', () => {
-  if (sessionStorage.getItem('accessToken')) {
+recommendModeElement.addEventListener('click', () => {  //recommend 버튼 눌렀을 때
+  if (localStorage.getItem('accessToken')) {
     mode = 1;
     getMode();
     worstWordDisplay();
     worstWordDisplayElement.style.display = "block";
   } else {
-    window.alert('로그인 후 이용해주세요');
+    window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인상태 아니면 로그인 창 팝업
     mode = 0;
     getMode();
     worstWordDisplay();
     worstWordDisplayElement.style.display = "none";
-    sessionStorage.removeItem('accessToken');
-  }
-
+    localStorage.removeItem('accessToken');
+    }
 })
 
 
