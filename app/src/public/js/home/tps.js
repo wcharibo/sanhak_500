@@ -63,12 +63,23 @@ randomModeElement.addEventListener('click', () => {
   getMode();
   worstWordDisplay();
   worstWordDisplayElement.style.display = "none";
+  sessionStorage.removeItem('accessToken');
 })
 recommendModeElement.addEventListener('click', () => {
-  mode = 1;
-  getMode();
-  worstWordDisplay();
-  worstWordDisplayElement.style.display = "block";
+  if (sessionStorage.getItem('accessToken')) {
+    mode = 1;
+    getMode();
+    worstWordDisplay();
+    worstWordDisplayElement.style.display = "block";
+  } else {
+    window.alert('로그인 후 이용해주세요');
+    mode = 0;
+    getMode();
+    worstWordDisplay();
+    worstWordDisplayElement.style.display = "none";
+    sessionStorage.removeItem('accessToken');
+  }
+
 })
 
 
@@ -270,21 +281,21 @@ restartElement.addEventListener("click", () => {
   resetAnimation();
 });
 
-const worstWordDisplay = () =>{
-  if(mode==1){
+const worstWordDisplay = () => {
+  if (mode == 1) {
     worstWordDisplayElement.style.display = 'block';
-    if(targetLetter) worstWordDisplayElement.innerHTML = `취약문자 '${targetLetter}'`;
+    if (targetLetter) worstWordDisplayElement.innerHTML = `취약문자 '${targetLetter}'`;
     else worstWordDisplayElement.innerHTML = `Random Mode`;
-  } else{
+  } else {
     worstWordDisplayElement.style.display = 'none';
   }
 };
 
-const resetAnimation = ()=>{
+const resetAnimation = () => {
   const target = wordDisplayElement;
   target.classList.remove('effect'),
-  void target.offsetWidth,
-  target.classList.add('effect');
+    void target.offsetWidth,
+    target.classList.add('effect');
 };
 
 const countError = () => {
@@ -550,7 +561,7 @@ const startTimer = (i) => {
         console.log(sampleTimeData);
         console.log(sampleErrorData);
         sampleCnt++;
-        
+
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {
@@ -574,7 +585,7 @@ const getTypingSpeed = () => {
   wpm = Math.floor(wpm);
 };
 
-const getMode = () =>{
+const getMode = () => {
   if (mode == 1) {
     getRecommendPractice();
   } else {
@@ -584,6 +595,6 @@ const getMode = () =>{
 
 getMode();
 
-toggleButton.addEventListener('click', ()=>{
+toggleButton.addEventListener('click', () => {
   navMenu.classList.toggle('active');
 });
