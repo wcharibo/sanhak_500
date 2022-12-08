@@ -174,8 +174,6 @@ body,
     left: -30%;
 }
 
-
-
 .timerTime input[name=timer] {
     vertical-align: middle;
     appearance: none;
@@ -191,7 +189,7 @@ body,
 a,
 a:visited {
     text-decoration: none;
-    color: #00ae68;
+    color: white;
 }
 
 a.button {
@@ -273,3 +271,25 @@ a.button.btnRestart{
     top: 11rem;
     display: none;
 }
+/*worst word display*/
+/* navbar */
+.navbar {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #263343;
+    top: 0;
+    left: 0;
+    padding: 8px 12px;
+}
+
+.navbar-logo{
+    font-size: 24px;
+    color: white;
+}
+
+.navbar-logo i{
+    color: #d49466;
+}
+/* navbar */
