@@ -13,7 +13,7 @@ let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
 let errCnt = 0;
 let wpm = 0;
-let targetLetter = 'e';
+let targetLetter;
 let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
 let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
@@ -45,7 +45,7 @@ let alphabet = [
   "w",
   "x",
   "y",
-  "z",
+  "z"
 ];
 let mode = 0; //0이면 random 1이면 recommend
 //sample
@@ -59,11 +59,13 @@ const popupSignIn = () => {
 randomModeElement.addEventListener('click', () => {
   mode = 0;
   getMode();
+  worstWordDisplay();
   worstWordDisplayElement.style.display = "none";
 })
 recommendModeElement.addEventListener('click', () => {
   mode = 1;
   getMode();
+  worstWordDisplay();
   worstWordDisplayElement.style.display = "block";
 })
 
@@ -147,8 +149,6 @@ const getRecommendPractice = () => {
   });
   wordInputElement.value = null;
 };
-
-worstWordDisplayElement.innerHTML = `취약문자 '${targetLetter}'`;
 
 const getResult = () => {
   //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
@@ -263,16 +263,26 @@ restartElement.addEventListener("click", () => {
   timeTable = new Array();
   timeCalTable = new Array();
   getMode();
+  worstWordDisplay();
   resetAnimation();
 });
 
+const worstWordDisplay = () =>{
+  if(mode==1){
+    worstWordDisplayElement.style.display = 'block';
+    if(targetLetter) worstWordDisplayElement.innerHTML = `취약문자 '${targetLetter}'`;
+    else worstWordDisplayElement.innerHTML = `Random Mode`;
+  } else{
+    worstWordDisplayElement.style.display = 'none';
+  }
+};
+
 const resetAnimation = ()=>{
   const target = wordDisplayElement;
-
   target.classList.remove('effect'),
   void target.offsetWidth,
   target.classList.add('effect');
-}
+};
 
 const countError = () => {
   //잘못 입력한 문자에 fixed 클래스 추가하여 결과를 보여줄 때 fixed 클래스 카운트하는 함수
@@ -537,6 +547,7 @@ const startTimer = (i) => {
         console.log(sampleTimeData);
         console.log(sampleErrorData);
         sampleCnt++;
+        
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {
