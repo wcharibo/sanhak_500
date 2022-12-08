@@ -276,12 +276,12 @@ a.button.btnRestart{
 .navbar {
     position: absolute;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: #263343;
+    background-color: #3b4326;
     top: 0;
     left: 0;
     padding: 8px 12px;
+    width: 100%;
 }
 
 .navbar-logo{
@@ -294,9 +294,11 @@ a.button.btnRestart{
 }
 
 .navbar-menu {
-    display: flex;
+    position: absolute;
+    display: none;
     list-style: none;
     padding-left: 5px;
+    right: 10px;
 }
 
 .navbar-menu li{
@@ -304,7 +306,25 @@ a.button.btnRestart{
 }
 
 .navbar-menu li:hover{
-    background-color: #007144;
+    background-color: #71911a;
     border-radius: 4px;
+}
+
+.navbar-menu.active {
+    display: flex;
+}
+
+.navbar-toggleButton{
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: #007144;
+}
+
+.navbar-menu.effect{
+    animation: fadeIn 1.5s;
+    -moz-animation: fadeIn 1.5s;
+    -webkit-animation: fadeIn 1.5s;
+    -o-animation: fadeIn 1.5s;
 }
 /* navbar */

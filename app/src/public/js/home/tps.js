@@ -8,6 +8,8 @@ const setTimer = document.querySelectorAll("input[name=timer]");
 const worstWordDisplayElement = document.querySelector("#worstWordDisplay");
 const randomModeElement = document.querySelector("#randomMode");
 const recommendModeElement = document.querySelector("#recommendMode");
+const toggleButton = document.querySelector('#navbarToggleButton');
+const navMenu = document.querySelector('#navbarMenu');
 let arrayWord = wordDisplayElement.querySelectorAll("span");
 let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
@@ -580,3 +582,7 @@ const getMode = () =>{
 };
 
 getMode();
+
+toggleButton.addEventListener('click', ()=>{
+  navMenu.classList.toggle('active');
+});
