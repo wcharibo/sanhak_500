@@ -161,6 +161,7 @@ const getResult = () => {
   wordInputElement.style.display = "none";
   let result = `${errCnt} wrong word \n typing speed: ${wpm}wpm`;
   resultDisplayElement.innerHTML = result;
+  resultDisplayElement.style.color = "#EFECDD";
 };
 
 function getRandomQuote() {
