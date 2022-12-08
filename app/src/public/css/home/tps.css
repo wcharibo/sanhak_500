@@ -19,18 +19,19 @@ body,
 }
 
 .container {
-    position: relative;
-    background-color: #ffe4c4;
+    position: absolute;
+    /* background-color: #ffe4c4; */
     padding: 1rem;
     border-radius: .5rem;
     width: 700px;
     max-width: 90%;
-    top: 4rem;
+    top: 20rem;
 }
 
 .timer {
     position: absolute;
-    top: 2rem;
+    top: 18rem;
+    left: 31%;
     font-size: 3rem;
     color: brown;
     font-weight: bold;
@@ -40,12 +41,51 @@ body,
     margin-bottom: 1rem;
     margin-left: calc(1rem + 2px);
     margin-right: calc(1rem + 2px);
-    width: 650px;
+    width: 700px;
     border: 0ch;
     border-style: solid;
     padding: 0.64rem 0rem;
     font-size: 2rem;
     display: block;
+    
+}
+.word-display.effect{
+    animation: fadeIn 1.5s;
+    -moz-animation: fadeIn 1.5s;
+    -webkit-animation: fadeIn 1.5s;
+    -o-animation: fadeIn 1.5s;
+}
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-moz-keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-o-keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .word-input {
@@ -59,7 +99,7 @@ body,
     padding: .5rem 1rem;
     font-size: 2rem;
     border-radius: .5rem;
-    position: relative;
+    position: absolute;
     z-index: 0;
     display: block;
 }
@@ -100,21 +140,6 @@ body,
     display: none;
 }
 
-
-#restartBtn {
-    border-radius: var(--roundness);
-    color: var(--sub-color);
-    cursor: pointer;
-    padding: 1rem 2rem;
-    transition: .125s;
-    width: min-content;
-
-}
-
-#restartBtn:hover {
-    font-weight: bold;
-    background-color: beige;
-}
 /*Practice Setting*/
 .practiceSetting{
     position: absolute;
@@ -162,7 +187,7 @@ body,
 }
 
 /* Time Select */
-/* Mode Select */
+/* Button Style */
 a,
 a:visited {
     text-decoration: none;
@@ -194,6 +219,15 @@ a.button {
     background: #5dc8cd;
 }
 
+a.button.btnRestart{
+    position: relative;
+    top: 8rem;
+    left: 40%;
+}
+.btnRestart{
+    background: #98200e;
+}
+
 .modeContainer {
     padding-top: 1em;
     margin-top: 1em;
@@ -206,6 +240,10 @@ a.button {
 
 .btnRecommend.btnPush {
     box-shadow: 0px 5px 0px 0px #1e8185;
+}
+
+.btnRestart.btnPush {
+    box-shadow: 0px 5px 0px 0px #450f07;
 }
 
 .btnPush:hover {
@@ -221,10 +259,17 @@ a.button {
     box-shadow: 0px 0px 0px 0px #1e8185;
 }
 
+.btnRestart.btnPush:hover {
+    box-shadow: 0px 0px 0px 0px #98200e;
+}
+
 /* Mode Select */
 
 /*worst word display*/
 .worst-word-display{
     font-size: 30px;
     text-align: center;
+    position: absolute;
+    top: 11rem;
+    display: none;
 }

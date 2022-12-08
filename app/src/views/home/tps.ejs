@@ -29,19 +29,17 @@
             </div>
         </div>
         <div class="modeContianer">
-            <a title="Button push Random" class="button btnPush btnRandom">Random</a>
-            <a title="Button push Recommend" class="button btnPush btnRecommend">Recommend</a>
+            <a title="Button push Random" class="button btnPush btnRandom" id="randomMode">Random</a>
+            <a title="Button push Recommend" class="button btnPush btnRecommend" id="recommendMode">Recommend</a>
+            <div class="worst-word-display" id="worstWordDisplay"></div>
         </div>
     </div>
     
     <div class="container">
-        <div class="worst-word-display" id="worstWordDisplay"></div>
-        <div class="word-display" id="wordDisplay"></div>
+        <div class="word-display effect" id="wordDisplay"></div>
         <div class="result-display" id="resultDisplay"></div>
         <input class="word-input" id="wordInput" spellcheck="false" placeholder="클릭해서 연습을 시작하세요" autocomplete="off"/>
-        <button id="restartBtn" aria-label="Restart Practice" data-ballon-pos="down" class tabindex="0">
-            restart
-        </button>
+            <a id="restartBtn" class="button btnPush btnRestart" aria-label="Restart Practice" data-ballon-pos="down" class tabindex="0">Restart</a>
     </div>
 </body>
 
