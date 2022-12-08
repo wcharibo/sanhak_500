@@ -43,13 +43,17 @@ let alphabet = [
   "w",
   "x",
   "y",
-  "z",
+  "z"
 ];
 //sample
 let sampleTimeData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
 let sampleErrorData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
 let sampleCnt = 0;
 
+
+
+
+//sample-end
 import { wordData } from "./wordList.js";
 
 const getRandomWord = () => {
@@ -511,6 +515,50 @@ const startTimer = (i) => {
         console.log(sampleTimeData);
         console.log(sampleErrorData);
         sampleCnt++;
+        //sample graph
+        let barChartElement = document.getElementById('bar-chart');
+        let barChartContainerElement = document.querySelector('#chartContainer');
+        barChartContainerElement.style.display = 'block';
+        let barChart = new Chart(barChartElement,{
+          type : 'bar',
+          data :{
+            labels : ["a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z"],
+            datasets : [
+              {
+                label: "Alphabet Input Time(ms)",
+                data: alphabetTimeTable,
+                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+              }
+            ]
+          }
+          
+        })
+        //sample graph
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {

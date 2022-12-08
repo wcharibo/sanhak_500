@@ -7,6 +7,7 @@
     <link rel="restartImg" sizes="57x57" href="img/restart_icon.png" />
     <link rel="stylesheet" href="css/tps.css" />
     <script type="module" src="js/tps.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Typing Practice Program</title>
 </head>
 
@@ -33,7 +34,9 @@
             <a title="Button push Recommend" class="button btnPush btnRecommend">Recommend</a>
         </div>
     </div>
-    
+    <div class="chartContainer" id="chartContainer">
+        <canvas id = "bar-chart" width="300" height="200"></canvas>
+    </div>
     <div class="container">
         <div class="worst-word-display" id="worstWordDisplay"></div>
         <div class="word-display" id="wordDisplay"></div>
