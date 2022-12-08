@@ -257,19 +257,14 @@ wordInputElement.addEventListener("input", () => {
     countError();
     getResult();
     wordTime();
-    //
-    startTimer(0);
-        countError();
-        getResult();
-        wordTime();
-        calAlphabetTable();
-        alphabetError();
-        targetLetter = getMaxError();
-        for (let i = 0; i < 26; i++) {
-          sampleTimeData[sampleCnt][i] = alphabetTimeTable[i];
-          sampleErrorData[sampleCnt][i] = alphabetErrorTable[i];
-        }
-        sampleCnt++;
+    calAlphabetTable();
+    alphabetError();
+    targetLetter = getMaxError();
+    for (let i = 0; i < 26; i++) {
+      sampleTimeData[sampleCnt][i] = alphabetTimeTable[i];
+      sampleErrorData[sampleCnt][i] = alphabetErrorTable[i];
+    }
+    sampleCnt++;
     console.log(`${errCnt} error detected`);
   } //renderNewQuote()
 });
@@ -571,7 +566,6 @@ const startTimer = (i) => {
     }, 1000);
   } else {
     clearInterval(timerInterval);
-    return;
   }
 };
 
@@ -604,6 +598,6 @@ toggleButton.addEventListener('click', () => {
   navMenu.classList.toggle('active');
 });
 
-signOutBtn.addEventListener('click', ()=>{
+signOutBtn.addEventListener('click', () => {
   localStorage.removeItem('accessToken');
 })
