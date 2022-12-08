@@ -75,7 +75,7 @@ recommendModeElement.addEventListener('click', () => {  //recommend 버튼 눌�
     worstWordDisplay();
     worstWordDisplayElement.style.display = "none";
     localStorage.removeItem('accessToken');
-    }
+  }
 })
 
 
