@@ -25,6 +25,7 @@ body,
     border-radius: .5rem;
     width: 700px;
     max-width: 90%;
+    min-height: 500px;
     top: 20rem;
 }
 
@@ -388,10 +389,10 @@ a.button.btnMypage{
 /* navbar */
 
 .chartContainer{
-  position: absolute;
-  left: 750px;
-  top: 17rem;
-  display: none;
+  /* position: absolute;
+  left: 0px;
+  top: 0rem; */
+  display: block;
 }
 
 /* #mypageButton {
