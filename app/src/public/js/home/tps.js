@@ -10,7 +10,10 @@ const randomModeElement = document.querySelector("#randomMode");
 const recommendModeElement = document.querySelector("#recommendMode");
 const toggleButton = document.querySelector('#navbarToggleButton');
 const navMenu = document.querySelector('#navbarMenu');
+const signInBtn = document.querySelector('#signIn');
 const signOutBtn = document.querySelector('#signOut');
+const signInLi = document.querySelector('#signInList');
+const signOutLi = document.querySelector('#signOutList');
 let arrayWord = wordDisplayElement.querySelectorAll("span");
 let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
@@ -595,10 +598,15 @@ const getMode = () => {
 
 getMode();
 
-toggleButton.addEventListener('click', () => {
+toggleButton.addEventListener('click', () => {  //네비게이션 바의 메뉴를 보이게 하는 버튼
   navMenu.classList.toggle('active');
+
 });
 
-signOutBtn.addEventListener('click', () => {
+signOutBtn.addEventListener('click', () => {  //로그아웃 버튼
   localStorage.removeItem('accessToken');
+})
+
+signInBtn.addEventListener('click', () => {
+  window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인 창 팝업
 })
