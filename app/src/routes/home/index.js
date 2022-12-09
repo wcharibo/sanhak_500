@@ -13,6 +13,6 @@ router.get("/mypage", ctrl.output.mypage);
 
 router.post("/login", ctrl.process.login);
 router.post("/register", ctrl.process.register);
-// router.post("/register", ctrl.process.register);
+// router.post("/mypage", ctrl.process.mypage);
 
 module.exports = router;
