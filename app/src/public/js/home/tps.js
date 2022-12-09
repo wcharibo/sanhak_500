@@ -599,8 +599,14 @@ const getMode = () => {
 getMode();
 
 toggleButton.addEventListener('click', () => {  //네비게이션 바의 메뉴를 보이게 하는 버튼
+  if (localStorage.getItem('accessToken')) {
+    signInLi.style.display = 'none';
+    signOutLi.style.display = 'block';
+  } else {
+    signInLi.style.display = 'block';
+    signOutLi.style.display = 'none';
+  }
   navMenu.classList.toggle('active');
-
 });
 
 signOutBtn.addEventListener('click', () => {  //로그아웃 버튼
