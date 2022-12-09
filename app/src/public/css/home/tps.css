@@ -388,9 +388,9 @@ a.button.btnMypage{
 /* navbar */
 
 .chartContainer{
-  /* position: absolute;
+  position: absolute;
   left: 750px;
-  top: 17rem; */
+  top: 17rem;
   display: none;
 }
 

@@ -609,11 +609,15 @@ let barChartElement01 = document.getElementById('bar-chart01');
 let barChartContainerElement = document.querySelector('#chartContainer');
 let mypageElement = document.querySelector("#mypageButton");
 
-mypageElement.addEventListener("click", () => {
+mypageElement.addEventListener("click", mypage);
+
+function mypage(){
+  location.href = "/mypage";
   barChartContainerElement.style.display = 'block';
-  resultDisplayElement.style.display = "none";
-  wordDisplayElement.style.display = "none";
-  wordInputElement.style.display = "none";
+  // resultDisplayElement.style.display = "none";
+  // wordDisplayElement.style.display = "none";
+  // wordInputElement.style.display = "none";
+  
   let barChart00 = new Chart(barChartElement00,{
     type : 'bar',
     data :{
@@ -644,7 +648,7 @@ mypageElement.addEventListener("click", () => {
     }
   })
 
-  errCnt = 0;
-  timeTable.splice(0);
-  timeCalTable.splice(0);
-});
+  // errCnt = 0;
+  // timeTable.splice(0);
+  // timeCalTable.splice(0);
+}
