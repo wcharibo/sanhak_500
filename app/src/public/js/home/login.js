@@ -25,11 +25,10 @@ function login() {
     .then((res) => res.json())
     .then((res) => {
       if (res.success){
-<<<<<<< HEAD
-        location.href = "/";
-=======
-        location.href = "../../../../tps.html";     //로그인 성공하면 타자연습 화면 출력
->>>>>>> 067469f1af303898b4fa22c3018347a49088cf86
+        location.href = "/tps"; 
+        localStorage.setItem('accessToken', res.data);
+        close();  //로그인 성공하면 타자연습 화면 출력
+
       }   else {
           if (res.err) return alert(res.err);
           alert(res.msg);

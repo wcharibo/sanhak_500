@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="provide customized typing practice" />
+    <meta charset="UTF-8" />
+    <link rel="restartImg" sizes="57x57" href="img/restart_icon.png" />
+    <link rel="stylesheet" href="css/home/tps.css" />
+    <script type="module" src="js/home/tps.js" defer></script>
+    <script src="https://kit.fontawesome.com/bc91881605.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+    </style>
+    <title>Typing Practice Program</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo" id="navbarLogo">
+            <i class="fa-regular fa-keyboard"></i>
+            <a href="">Typing practice</a>
+        </div>
+        <div class="navbar-menu effect" id="navbarMenu">
+            <li><a href="">My Page</a></li>
+            <li><a href="https://github.com/wcharibo/sanhak_500">Our Github</a></li>
+            <li><a href="/tps" class="sign-out" id="signOut">Sign Out</a></li>
+        </div>
+        <a href="#" class="navbar-toggleButton" id="navbarToggleButton">
+            <i class="fas fa-bars"></i>
+        </a>
+    </nav>
+    <div class="timer" id="timer"></div>
+    <div class="practiceSetting">
+        <div class="timerContainer">
+            <div class="timerTimes">
+                <div class="selectTime">SelectPracticeTime</div>
+                <div>
+                    <label class="timerTime"><input type="radio" name="timer" value="15" /><span>15</span></label>
+                </div>
+                <div>
+                    <label class="timerTime"><input type="radio" name="timer" value="30"
+                            checked /><span>30</span></label>
+                </div>
+                <div>
+                    <label class="timerTime"><input type="radio" name="timer" value="60" /><span>60</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="modeContianer">
+            <a title="Button push Random" class="button btnPush btnRandom" id="randomMode">Random</a>
+            <a title="Button push Recommend" class="button btnPush btnRecommend" id="recommendMode">Recommend</a>
+            <div class="worst-word-display" id="worstWordDisplay"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="word-display effect" id="wordDisplay"></div>
+        <div class="result-display" id="resultDisplay"></div>
+        <input class="word-input" id="wordInput" spellcheck="false" placeholder="클릭해서 연습을 시작하세요" autocomplete="off" />
+        <a id="restartBtn" class="button btnPush btnRestart" aria-label="Restart Practice" data-ballon-pos="down" class
+            tabindex="0">Restart</a>
+    </div>
+</body>
+
+</html>

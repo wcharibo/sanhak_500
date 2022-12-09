@@ -228,3 +228,8 @@ a.button {
     font-size: 30px;
     text-align: center;
 }
+
+/* sample chart */
+.chartContainer{
+    display: none;
+}

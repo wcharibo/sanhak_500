@@ -6,12 +6,17 @@ const restartElement = document.querySelector("#restartBtn");
 const resultDisplayElement = document.querySelector("#resultDisplay");
 const setTimer = document.querySelectorAll("input[name=timer]");
 const worstWordDisplayElement = document.querySelector("#worstWordDisplay");
+const randomModeElement = document.querySelector("#randomMode");
+const recommendModeElement = document.querySelector("#recommendMode");
+const toggleButton = document.querySelector('#navbarToggleButton');
+const navMenu = document.querySelector('#navbarMenu');
+const signOutBtn = document.querySelector('#signOut');
 let arrayWord = wordDisplayElement.querySelectorAll("span");
 let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value;
 let errCnt = 0;
 let wpm = 0;
-let targetLetter = 'e';
+let targetLetter;
 let timeTable = new Array(); //입력시간 저장할 테이블
 let timeCalTable = new Array(); //문자 사이 입력시간 저장할 테이블
 let alphabetTimeTable = new Array(); //입력시간 기록할 테이블
@@ -45,22 +50,41 @@ let alphabet = [
   "y",
   "z"
 ];
+let mode = 0; //0이면 random 1이면 recommend
 //sample
 let sampleTimeData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
 let sampleErrorData = new Array(); //입력시간 그래프를 그리기 위한 샘플 데이터
 let sampleCnt = 0;
 
+randomModeElement.addEventListener('click', () => { //random 버튼 눌렀을 때
+  mode = 0;
+  getMode();
+  worstWordDisplay();
+  worstWordDisplayElement.style.display = "none";
+})
+recommendModeElement.addEventListener('click', () => {  //recommend 버튼 눌렀을 때
+  if (localStorage.getItem('accessToken')) {
+    mode = 1;
+    getMode();
+    worstWordDisplay();
+    worstWordDisplayElement.style.display = "block";
+  } else {
+    window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인상태 아니면 로그인 창 팝업
+    mode = 0;
+    getMode();
+    worstWordDisplay();
+    worstWordDisplayElement.style.display = "none";
+  }
+})
 
 
-
-//sample-end
 import { wordData } from "./wordList.js";
 
 const getRandomWord = () => {
   //랜덤 연습모드를 위한 단어 랜덤하게 가져오기
   let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 30; i++) {
     random = Math.floor(Math.random() * (wordData.length - 1) + 1);
     arr = arr + " " + wordData[random];
   };
@@ -134,17 +158,15 @@ const getRecommendPractice = () => {
   wordInputElement.value = null;
 };
 
-worstWordDisplayElement.innerHTML = `취약문자 '${targetLetter }'`;
-
 const getResult = () => {
   //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
-  startTimer(0);
   getTypingSpeed();
   resultDisplayElement.style.display = "block";
   wordDisplayElement.style.display = "none";
   wordInputElement.style.display = "none";
   let result = `${errCnt} wrong word \n typing speed: ${wpm}wpm`;
   resultDisplayElement.innerHTML = result;
+  resultDisplayElement.style.color = "#EFECDD";
 };
 
 function getRandomQuote() {
@@ -185,7 +207,7 @@ wordInputElement.addEventListener("input", () => {
   //인풋 이벤트 발생할 때마다 입력된 글자와 비교하여 색 wordDisplay에 색표시
   arrayWord = wordDisplayElement.querySelectorAll("span");
   arrayValue = wordInputElement.value.split("");
-  if(arrayValue.length==1&&timeTable[arrayValue.length]==null) startTimer(1);
+  if (arrayValue.length == 1 && timeTable[arrayValue.length] == null) startTimer(1);
   if (arrayValue.length != 0) {
     if (
       timeTable[arrayValue.length] != null &&
@@ -206,7 +228,7 @@ wordInputElement.addEventListener("input", () => {
     errCnt = 0;
     timeTable = new Array();
     timeCalTable = new Array();
-    getRandomPractice();
+    startTimer(0);
   }
 
   let correct = true;
@@ -235,6 +257,14 @@ wordInputElement.addEventListener("input", () => {
     countError();
     getResult();
     wordTime();
+    calAlphabetTable();
+    alphabetError();
+    targetLetter = getMaxError();
+    for (let i = 0; i < 26; i++) {
+      sampleTimeData[sampleCnt][i] = alphabetTimeTable[i];
+      sampleErrorData[sampleCnt][i] = alphabetErrorTable[i];
+    }
+    sampleCnt++;
     console.log(`${errCnt} error detected`);
   } //renderNewQuote()
 });
@@ -248,8 +278,27 @@ restartElement.addEventListener("click", () => {
   errCnt = 0;
   timeTable = new Array();
   timeCalTable = new Array();
-  getRecommendPractice();
+  getMode();
+  worstWordDisplay();
+  resetAnimation();
 });
+
+const worstWordDisplay = () => {
+  if (mode == 1) {
+    worstWordDisplayElement.style.display = 'block';
+    if (targetLetter) worstWordDisplayElement.innerHTML = `취약문자 '${targetLetter}'`;
+    else worstWordDisplayElement.innerHTML = `Random Mode`;
+  } else {
+    worstWordDisplayElement.style.display = 'none';
+  }
+};
+
+const resetAnimation = () => {
+  const target = wordDisplayElement;
+  target.classList.remove('effect'),
+    void target.offsetWidth,
+    target.classList.add('effect');
+};
 
 const countError = () => {
   //잘못 입력한 문자에 fixed 클래스 추가하여 결과를 보여줄 때 fixed 클래스 카운트하는 함수
@@ -259,6 +308,11 @@ const countError = () => {
     }
   }
 };
+
+const getMaxError = () => {
+  let max = Math.max(...alphabetTimeTable);
+  return alphabet[alphabetTimeTable.indexOf(max)];
+}
 
 const wordTime = () => {
   //문자입력시간 분리
@@ -275,8 +329,8 @@ const calAlphabetTable = () => {
     alphabetTable[i] = 0;
     alphabetErrorTable[i] = 0;
     // sample
-    sampleErrorData[sampleCnt]= new Array();
-    sampleTimeData[sampleCnt]= new Array();
+    sampleErrorData[sampleCnt] = new Array();
+    sampleTimeData[sampleCnt] = new Array();
   }
   for (let i = 0; i < arrayValue.length; i++) {
     switch (arrayValue[i]) {
@@ -388,7 +442,7 @@ const calAlphabetTable = () => {
         break;
     }
   }
-  
+
   for (let i = 0; i < 26; i++) {
     if (alphabetTable[i] == 0) return;
     alphabetTimeTable[i] = alphabetTimeTable[i] / alphabetTable[i];
@@ -488,81 +542,31 @@ let alphabetError = () => {
 };
 
 let startTime, timerInterval;
-const startTimer = (i) => {
+const startTimer = (timerOn) => {
   //타이머
   timerElement.innerText = practiceTime;
-  if (i == 1) {
+  if (timerOn == 1) {
+    console.log('start');
     startTime = new Date();
     timerInterval = setInterval(() => {
       timerElement.innerText = practiceTime - getTimerTime();
       if (timerElement.innerText == 0) {
-        startTimer(0);
-        countError();
         getResult();
+        countError();
         wordTime();
         calAlphabetTable();
         alphabetError();
-        let max = Math.max(...alphabetTimeTable);
-        targetLetter = alphabet[alphabetTimeTable.indexOf(max)];
-        console.log(alphabetTimeTable.indexOf(max));
-        console.log(alphabetTimeTable);
-        console.log(alphabet[alphabetTimeTable.indexOf(max)]);
+        targetLetter = getMaxError();
         for (let i = 0; i < 26; i++) {
           sampleTimeData[sampleCnt][i] = alphabetTimeTable[i];
           sampleErrorData[sampleCnt][i] = alphabetErrorTable[i];
         }
-        console.log(sampleTimeData);
-        console.log(sampleErrorData);
         sampleCnt++;
-        //sample graph
-        let barChartElement = document.getElementById('bar-chart');
-        let barChartContainerElement = document.querySelector('#chartContainer');
-        barChartContainerElement.style.display = 'block';
-        let barChart = new Chart(barChartElement,{
-          type : 'bar',
-          data :{
-            labels : ["a",
-            "b",
-            "c",
-            "d",
-            "e",
-            "f",
-            "g",
-            "h",
-            "i",
-            "j",
-            "k",
-            "l",
-            "m",
-            "n",
-            "o",
-            "p",
-            "q",
-            "r",
-            "s",
-            "t",
-            "u",
-            "v",
-            "w",
-            "x",
-            "y",
-            "z"],
-            datasets : [
-              {
-                label: "Alphabet Input Time(ms)",
-                data: alphabetTimeTable,
-                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-              }
-            ]
-          }
-          
-        })
-        //sample graph
       } //if timer is 0 then stop practice and getResult
     }, 1000);
   } else {
     clearInterval(timerInterval);
-    return;
+    console.log('clear');
   }
 };
 
@@ -581,5 +585,20 @@ const getTypingSpeed = () => {
   wpm = Math.floor(wpm);
 };
 
-getRecommendPractice();
-// getRandomPractice();
+const getMode = () => {
+  if (mode == 1) {
+    getRecommendPractice();
+  } else {
+    getRandomPractice();
+  }
+};
+
+getMode();
+
+toggleButton.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
+
+signOutBtn.addEventListener('click', () => {
+  localStorage.removeItem('accessToken');
+})
