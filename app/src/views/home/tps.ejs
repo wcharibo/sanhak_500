@@ -7,6 +7,7 @@
     <link rel="restartImg" sizes="57x57" href="img/restart_icon.png" />
     <link rel="stylesheet" href="css/home/tps.css" />
     <script type="module" src="js/home/tps.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/bc91881605.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +40,7 @@
             <div class="timerTimes">
                 <div class="selectTime">SelectPracticeTime</div>
                 <div>
-                    <label class="timerTime"><input type="radio" name="timer" value="15" /><span>15</span></label>
+                    <label class="timerTime"><input type="radio" name="timer" value="4" /><span>4</span></label>
                 </div>
                 <div>
                     <label class="timerTime"><input type="radio" name="timer" value="30"
@@ -56,6 +57,12 @@
             <div class="worst-word-display" id="worstWordDisplay"></div>
         </div>
     </div>
+
+    <div class="chartContainer" id="chartContainer">
+      <canvas id = "bar-chart00" width="300" height="200"></canvas>
+      <canvas id = "bar-chart01" width="300" height="200"></canvas>
+    </div>
+
     <div class="container">
         <div class="timer" id="timer"></div>
         <div class="word-display effect" id="wordDisplay"></div>
@@ -63,6 +70,8 @@
         <input class="word-input" id="wordInput" spellcheck="false" placeholder="클릭해서 연습을 시작하세요" autocomplete="off" />
         <a id="restartBtn" class="button btnPush btnRestart" aria-label="Restart Practice" data-ballon-pos="down" class
             tabindex="0">Restart</a>
+        <a id="mypageButton" class="button btnPush btnMypage" aria-label="mypage" data-ballon-pos="down" class
+            tabindex="0">Mypage</a>
     </div>
 </body>
 

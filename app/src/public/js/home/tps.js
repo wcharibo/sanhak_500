@@ -84,7 +84,7 @@ recommendModeElement.addEventListener('click', () => {  //recommend 버튼 눌�
 const getRandomWord = () => { //랜덤 연습모드를 위한 단어 랜덤하게 가져오기
   let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 40; i++) {
     random = Math.floor(Math.random() * (wordData.length - 1) + 1);
     arr = arr + " " + wordData[random];
   };
@@ -114,7 +114,7 @@ const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져�
     else {
       worstWord = wordData.filter(findWorstWord);
     }
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 40; i++) {
       random = Math.floor(Math.random() * (worstWord.length - 1) + 1);
       arr = arr + " " + worstWord[random];
     }
@@ -253,7 +253,9 @@ wordInputElement.addEventListener("input", () => {  //인풋 이벤트 발생할
   } //renderNewQuote()
 });
 
-restartElement.addEventListener("click", () => {  //재시작하는 버튼 재시작하고 다시 입력창을 focus해줘야 하는 불편함이 있음
+restartElement.addEventListener("click", () => {
+  //재시작하는 버튼 재시작하고 다시 입력창을 focus해줘야 하는 불편함이 있음
+  barChartContainerElement.style.display = 'none';
   resultDisplayElement.style.display = "none";
   wordDisplayElement.style.display = "block";
   wordInputElement.style.display = "block";
@@ -592,3 +594,48 @@ signInBtn.addEventListener('click', () => {
 })
 
 getMode();
+/////////////////////////
+let barChartElement00 = document.getElementById('bar-chart00');
+let barChartElement01 = document.getElementById('bar-chart01');
+let barChartContainerElement = document.querySelector('#chartContainer');
+let mypageElement = document.querySelector("#mypageButton");
+
+mypageElement.addEventListener("click", () => {
+  barChartContainerElement.style.display = 'block';
+  resultDisplayElement.style.display = "none";
+  wordDisplayElement.style.display = "none";
+  wordInputElement.style.display = "none";
+  let barChart00 = new Chart(barChartElement00,{
+    type : 'bar',
+    data :{
+      labels : ["a","b","c","d","e","f","g","h","i","j","k","l","m",
+      "n","o","p","q","r","s","t","u","v","w","x","y","z"],
+      datasets : [
+        {
+          label: "Alphabet Input Time(ms)",
+          data: alphabetTimeTable,
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        }
+      ]
+    }
+  })
+
+  let barChart01 = new Chart(barChartElement01,{
+    type : 'bar',
+    data :{
+      labels : ["a","b","c","d","e","f","g","h","i","j","k","l","m",
+      "n","o","p","q","r","s","t","u","v","w","x","y","z"],
+      datasets : [
+        {
+          label: "Alphabet Error Count",
+          data: alphabetErrorTable,
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        }
+      ]
+    }
+  })
+
+  errCnt = 0;
+  timeTable.splice(0);
+  timeCalTable.splice(0);
+});
