@@ -19,10 +19,10 @@ const output = {
     res.render("home/register");
   },
 
-  // mypage: (req, res) => {
-  //   logger.info(`GET /tps 304 "마이페이지 화면으로 이동"`);
-  //   res.render("home/mypage")
-  // },
+  mypage: (req, res) => {
+    logger.info(`GET /tps 304 "마이페이지 화면으로 이동"`);
+    res.render("home/mypage")
+  },
 };
 
 const process = {

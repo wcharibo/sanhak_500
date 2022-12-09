@@ -623,15 +623,48 @@ mypageElement.addEventListener("click", () => {
     data :{
       labels : ["a","b","c","d","e","f","g","h","i","j","k","l","m",
       "n","o","p","q","r","s","t","u","v","w","x","y","z"],
-      datasets : [
-        {
-          label: "Alphabet Input Time(ms)",
-          data: alphabetTimeTable,
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+      datasets : [{
+        label: "Alphabet Input Time(ms)",
+        data: alphabetTimeTable,
+        backgroundColor: [
+          'rgba(0, 0, 0, 0)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+      }]
+    },
+    options: {
+      legend: {
+        labels: {
+          fontColor: "white",
         }
-      ]
-    }
-  })
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            fontColor : "white",
+          },
+          gridLines:{
+            color: 'white',
+          }
+        }],
+        xAxes: [{
+          ticks:{
+            fontColor : 'white',
+          },
+          gridLines:{
+            color: "white",
+            }
+          }]
+        }
+      }
+    })
 
   let barChart01 = new Chart(barChartElement01,{
     type : 'bar',
@@ -648,7 +681,17 @@ mypageElement.addEventListener("click", () => {
     }
   })
 
-  // errCnt = 0;
-  // timeTable.splice(0);
-  // timeCalTable.splice(0);
+  errCnt = 0;
+  timeTable.splice(0);
+  timeCalTable.splice(0);
 });
+
+const mypageBtn = document.querySelector("#mypageBtn");
+
+mypageBtn.addEventListener("click", mypage);
+
+function mypage() {
+ 
+  location.href = "/mypage"; 
+      
+}
