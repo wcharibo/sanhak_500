@@ -28,6 +28,7 @@ function login() {
         location.href = "/tps"; 
         localStorage.setItem('accessToken', res.data);
         close();  //로그인 성공하면 타자연습 화면 출력
+
       }   else {
           if (res.err) return alert(res.err);
           alert(res.msg);
