@@ -84,7 +84,7 @@ recommendModeElement.addEventListener('click', () => {  //recommend 버튼 눌�
 const getRandomWord = () => { //랜덤 연습모드를 위한 단어 랜덤하게 가져오기
   let random = Math.floor(Math.random() * (wordData.length - 1) + 1);
   let arr = wordData[random];
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 40; i++) {
     random = Math.floor(Math.random() * (wordData.length - 1) + 1);
     arr = arr + " " + wordData[random];
   };
@@ -114,7 +114,7 @@ const getRecommendWord = () => {  //추천연습모드를 위한 단어 가져�
     else {
       worstWord = wordData.filter(findWorstWord);
     }
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 40; i++) {
       random = Math.floor(Math.random() * (worstWord.length - 1) + 1);
       arr = arr + " " + worstWord[random];
     }
