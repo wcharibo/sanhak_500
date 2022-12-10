@@ -4,9 +4,8 @@
 <head>
     <meta name="description" content="provide customized typing practice" />
     <meta charset="UTF-8" />
-    <link rel="restartImg" sizes="57x57" href="img/restart_icon.png" />
-    <link rel="stylesheet" href="css/home/tps.css" />
-    <script type="module" src="js/home/tps.js" defer></script>
+    <link rel="stylesheet" href="css/home/mypage.css" />
+    <script type="module" src="js/home/mypage.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/bc91881605.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,10 +21,9 @@
     <nav class="navbar">
         <div class="navbar-logo" id="navbarLogo">
             <i class="fa-regular fa-keyboard"></i>
-            <a href="">Typing practice</a>
+            <a href="/">Typing practice</a>
         </div>
         <div class="navbar-menu effect" id="navbarMenu">
-            <li><a href="">My Page</a></li>
             <li><a href="https://github.com/wcharibo/sanhak_500">Our Github</a></li>
             <li><a href="/" class="sign-out" id="signOut">Sign Out</a></li>
         </div>
@@ -34,9 +32,9 @@
         </a>
     </nav>
     
-    <button onclick="location.href='http://localhost:3000/'">home</button>
-    
-    
+    <div class="inputTime"><h2>알파벳 별 입력시간</h2></div>
+    <hr/>
+    <div class="errorCount"><h2>알파벳 별 오타 수 </h2></div>
 </body>
 
 </html>
