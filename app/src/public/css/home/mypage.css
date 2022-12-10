@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    margin: 0;
+    background-color: #587556;
+    position: relative;
+}
+
+body,
+.word-display,
+.word-input {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #EFECDD;
+}
+
+a,
+a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    background-color: #3b4326;
+    top: 0;
+    left: 0;
+    padding: 8px 12px;
+    width: 100%;
+}
+
+.navbar-logo{
+    font-size: 24px;
+    color: white;
+}
+
+.navbar-logo i{
+    color: white;
+}
+
+.navbar-menu {
+    position: absolute;
+    display: none;
+    list-style: none;
+    padding-left: 5px;
+    right: 5%;
+}
+
+.navbar-menu li{
+    padding: 8px 12px;
+}
+
+.navbar-menu li:hover{
+    background-color: #71911a;
+    border-radius: 4px;
+}
+
+.navbar-menu.active {
+    display: flex;
+}
+
+.navbar-menu.effect{
+    animation: fadeInLeft 1s;
+    -moz-animation: fadeInLeft 1s;
+    -webkit-animation: fadeInLeft 1s;
+    -o-animation: fadeInLeft 1s;
+}
+@keyframes fadeInLeft {
+    from{
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(0);
+    }
+}
+@-moz-keyframes fadeInLeft {
+    from{
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadeInLeft {
+    from{
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-o-keyframes fadeInLeft {
+    from{
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.navbar-toggleButton{
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: #007144;
+}
+
+/* navbar */
+
+hr{
+    width: 100%;
+    position: absolute;
+    top: 40rem;
+}
+
+.inputTime {
+    position: absolute;
+    top: 20rem;
+    width: 100%;
+}
+
+.errorCount{
+    position: absolute;
+    top: 60rem;
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+}
