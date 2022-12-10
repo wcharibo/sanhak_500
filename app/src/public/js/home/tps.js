@@ -623,15 +623,25 @@ graphElement.addEventListener("click", () => {
     data :{
       labels : ["a","b","c","d","e","f","g","h","i","j","k","l","m",
       "n","o","p","q","r","s","t","u","v","w","x","y","z"],
-      datasets : [{
+      datasets : [
+        {
         label: "Alphabet Input Time(ms)",
         data: alphabetTimeTable,
-        backgroundColor: [
-          'rgba(0, 0, 0, 0)'
-        ],
-        borderColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-      }]
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        }
+      ]   
     },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          ticks: { color: 'white', beginAtZero: true }
+        },
+        x: {
+          ticks: { color: 'white', beginAtZero: true }
+        }
+      }
+    }
   })
 
   let barChart01 = new Chart(barChartElement01,{
@@ -646,6 +656,17 @@ graphElement.addEventListener("click", () => {
           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
         }
       ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          ticks: { color: 'white', beginAtZero: true }
+        },
+        x: {
+          ticks: { color: 'white', beginAtZero: true }
+        }
+      }
     }
   })
 
