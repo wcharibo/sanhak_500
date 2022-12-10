@@ -14,6 +14,8 @@ const signInBtn = document.querySelector('#signIn');
 const signOutBtn = document.querySelector('#signOut');
 const signInLi = document.querySelector('#signInList');
 const signOutLi = document.querySelector('#signOutList');
+const myPageBtn = document.querySelector('#myPage');
+const qnaBtn = document.querySelector('#qna');
 let arrayWord = wordDisplayElement.querySelectorAll("span");
 let arrayValue = wordInputElement.value.split("");
 let practiceTime = document.querySelector('input[name="timer"]:checked').value; //default 연습시간을 30초로 설정
@@ -596,6 +598,18 @@ signOutBtn.addEventListener('click', () => {  //로그아웃 버튼
 
 signInBtn.addEventListener('click', () => {
   window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인 창 팝업
+})
+
+myPageBtn.addEventListener('click', ()=>{
+  if(localStorage.getItem('accessToken')){
+    location.href = '/mypage';
+  } else{
+    window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인 창 팝업
+  }
+})
+
+qnaBtn.addEventListener('click', ()=>{
+  alert('깃허브에서 contributer에게 연락주세요');
 })
 
 /*chart*/
