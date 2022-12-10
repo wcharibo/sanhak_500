@@ -158,6 +158,7 @@ const getRecommendPractice = () => {  //가져온 단어 분리하기
 
 const getResult = () => { //문자 입력 끝나면 단어, 입력 div 닫고 결과창 출력
   getTypingSpeed();
+  barChartContainerElement.style.display = 'none';
   resultDisplayElement.style.display = "block";
   wordDisplayElement.style.display = "none";
   wordInputElement.style.display = "none";
@@ -253,7 +254,10 @@ wordInputElement.addEventListener("input", () => {  //인풋 이벤트 발생할
   } //renderNewQuote()
 });
 
-restartElement.addEventListener("click", () => {  //재시작하는 버튼 재시작하고 다시 입력창을 focus해줘야 하는 불편함이 있음
+restartElement.addEventListener("click", () => {
+  //재시작하는 버튼 재시작하고 다시 입력창을 focus해줘야 하는 불편함이 있음
+  timerElement.style.display = "block";
+  barChartContainerElement.style.display = 'none';
   resultDisplayElement.style.display = "none";
   wordDisplayElement.style.display = "block";
   wordInputElement.style.display = "block";
@@ -586,6 +590,77 @@ toggleButton.addEventListener('click', () => {  //네비게이션 바의 메뉴�
 signOutBtn.addEventListener('click', () => {  //로그아웃 버튼
   localStorage.removeItem('accessToken');
 })
+
+/*chart*/
+let barChartElement00 = document.getElementById('bar-chart00');
+let barChartElement01 = document.getElementById('bar-chart01');
+let barChartContainerElement = document.querySelector('#chartContainer');
+let graphElement = document.querySelector("#graphButton");
+
+graphElement.addEventListener("click", () => {
+  barChartContainerElement.style.display = 'block';
+  resultDisplayElement.style.display = "none";
+  wordDisplayElement.style.display = "none";
+  wordInputElement.style.display = "none";
+  timerElement.style.display = "none";
+  
+  let barChart00 = new Chart(barChartElement00,{
+    type : 'bar',
+    data :{
+      labels : ["a","b","c","d","e","f","g","h","i","j","k","l","m",
+      "n","o","p","q","r","s","t","u","v","w","x","y","z"],
+      datasets : [
+        {
+        label: "Alphabet Input Time(ms)",
+        data: alphabetTimeTable,
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        }
+      ]   
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          ticks: { color: 'white', beginAtZero: true }
+        },
+        x: {
+          ticks: { color: 'white', beginAtZero: true }
+        }
+      }
+    }
+  })
+
+  let barChart01 = new Chart(barChartElement01,{
+    type : 'bar',
+    data :{
+      labels : ["a","b","c","d","e","f","g","h","i","j","k","l","m",
+      "n","o","p","q","r","s","t","u","v","w","x","y","z"],
+      datasets : [
+        {
+          label: "Alphabet Error Count",
+          data: alphabetErrorTable,
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          ticks: { color: 'white', beginAtZero: true }
+        },
+        x: {
+          ticks: { color: 'white', beginAtZero: true }
+        }
+      }
+    }
+  })
+
+  errCnt = 0;
+  timeTable.splice(0);
+  timeCalTable.splice(0);
+});
+
 
 signInBtn.addEventListener('click', () => {
   window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인 창 팝업
