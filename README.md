@@ -3,13 +3,16 @@
 ### 타자연습시 취약문자 위주의 연습을 하는, 효율적인 타자 실력 향상을 위한 프로그램
 #### 취약문자: 오타 빈도가 높은 문자 + 문자 입력 시간이 긴 문자
 
+### 미리보기
+![화면 캡처 2022-12-10 173705](https://user-images.githubusercontent.com/80238487/206841459-bd65f1f4-2d29-47e1-8d78-f6a13064d957.png)
 
-### 실행 방법
+
+### 설치 방법
 ```
 1. Node.js 설치
-2. npm install
-3. .env파일을 app폴더에 생성 (contributor에게 문의)
-4. npm start
+2. .env파일을 app폴더에 생성 (contributor에게 문의)
+3. cd app
+4. npm install --production
 ```
 ### 의존성
 * Node.js : v18.12.1
@@ -26,11 +29,16 @@
     "winston": "^3.8.2"
 ```
 
+### 실행 방법
+1. cd app
+2. npm start
+3. 웹브라우저에서 http://127.0.0.1:3000/ 입력
+
 ### 라이선스
 ```
 The MIT License (MIT)
 
-Copyright (c) 2021 yoonleeverse
+Copyright (c) 2022 Team500
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
