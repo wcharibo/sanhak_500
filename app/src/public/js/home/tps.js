@@ -661,15 +661,7 @@ graphElement.addEventListener("click", () => {
   timeCalTable.splice(0);
 });
 
-const mypageBtn = document.querySelector("#mypageBtn");
 
-mypageBtn.addEventListener("click", mypage);
-
-function mypage() {
- 
-  location.href = "/mypage"; 
-      
-}
 signInBtn.addEventListener('click', () => {
   window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인 창 팝업
 })
