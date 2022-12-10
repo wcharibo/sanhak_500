@@ -1,3 +1,4 @@
+const RANDOM_QUOTE_APU_URL = "http://api.quotable.io/random";
 const wordDisplayElement = document.querySelector("#wordDisplay");
 const wordInputElement = document.querySelector("#wordInput");
 const timerElement = document.querySelector("#timer");
@@ -576,7 +577,9 @@ const getMode = () => { //mode에 따라 연습모드 가져옴
   }
 };
 
-toggleButton.addEventListener('click', () => {  //네비게이션 바의 메뉴를 보이게 하는 버튼
+getMode();
+
+toggleButton.addEventListener('click', () => {
   if (localStorage.getItem('accessToken')) {
     signInLi.style.display = 'none';
     signOutLi.style.display = 'block';
@@ -589,6 +592,10 @@ toggleButton.addEventListener('click', () => {  //네비게이션 바의 메뉴�
 
 signOutBtn.addEventListener('click', () => {  //로그아웃 버튼
   localStorage.removeItem('accessToken');
+})
+
+signInBtn.addEventListener('click', () => {
+  window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인 창 팝업
 })
 
 /*chart*/
@@ -660,10 +667,3 @@ graphElement.addEventListener("click", () => {
   timeTable.splice(0);
   timeCalTable.splice(0);
 });
-
-
-signInBtn.addEventListener('click', () => {
-  window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인 창 팝업
-})
-
-getMode();
