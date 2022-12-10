@@ -591,12 +591,7 @@ signOutBtn.addEventListener('click', () => {  //로그아웃 버튼
   localStorage.removeItem('accessToken');
 })
 
-signInBtn.addEventListener('click', () => {
-  window.open('/login', 'SignIn', 'width = 500, height = 500'); //로그인 창 팝업
-})
-
-getMode();
-/////////////////////////
+/*chart*/
 let barChartElement00 = document.getElementById('bar-chart00');
 let barChartElement01 = document.getElementById('bar-chart01');
 let barChartContainerElement = document.querySelector('#chartContainer');
@@ -608,7 +603,7 @@ graphElement.addEventListener("click", () => {
   wordDisplayElement.style.display = "none";
   wordInputElement.style.display = "none";
   timerElement.style.display = "none";
-// });
+  
   let barChart00 = new Chart(barChartElement00,{
     type : 'bar',
     data :{
