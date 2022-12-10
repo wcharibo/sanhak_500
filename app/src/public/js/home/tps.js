@@ -605,7 +605,8 @@ toggleButton.addEventListener('click', () => {
 signOutBtn.addEventListener('click', () => {
   localStorage.removeItem('accessToken');
 })
-/////////////////////////
+
+/*chart*/
 let barChartElement00 = document.getElementById('bar-chart00');
 let barChartElement01 = document.getElementById('bar-chart01');
 let barChartContainerElement = document.querySelector('#chartContainer');
@@ -617,7 +618,7 @@ graphElement.addEventListener("click", () => {
   wordDisplayElement.style.display = "none";
   wordInputElement.style.display = "none";
   timerElement.style.display = "none";
-// });
+  
   let barChart00 = new Chart(barChartElement00,{
     type : 'bar',
     data :{
