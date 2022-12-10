@@ -229,12 +229,12 @@ a.button.btnRestart{
     background: #FF7F50;
 }
 
-a.button.btnMypage{
+a.button.btngraph{
   position: relative;
   top: 8rem;
   left: 40%;
 }
-.btnMypage{
+.btngraph{
   color: #EFECDD;
   background: #FF7F50;
 }
@@ -257,7 +257,7 @@ a.button.btnMypage{
     box-shadow: 0px 5px 0px 0px #8a452c;
 }
 
-.btnMypage.btnPush {
+.btngraph.btnPush {
   box-shadow: 0px 5px 0px 0px #8a452c;
 }
 
@@ -278,7 +278,7 @@ a.button.btnMypage{
     box-shadow: 0px 0px 0px 0px #ff7f5028;
 }
 
-.btnMypage.btnPush:hover {
+.btngraph.btnPush:hover {
   box-shadow: 0px 0px 0px 0px #ff7f5028;
 }
 
@@ -389,10 +389,7 @@ a.button.btnMypage{
 /* navbar */
 
 .chartContainer{
-  /* position: absolute;
-  left: 0px;
-  top: 0rem; */
-  display: block;
+  display: none;
 }
 
 /* #mypageButton {

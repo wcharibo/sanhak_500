@@ -600,9 +600,9 @@ getMode();
 let barChartElement00 = document.getElementById('bar-chart00');
 let barChartElement01 = document.getElementById('bar-chart01');
 let barChartContainerElement = document.querySelector('#chartContainer');
-let mypageElement = document.querySelector("#mypageButton");
+let graphElement = document.querySelector("#graphButton");
 
-mypageElement.addEventListener("click", () => {
+graphElement.addEventListener("click", () => {
   barChartContainerElement.style.display = 'block';
   resultDisplayElement.style.display = "none";
   wordDisplayElement.style.display = "none";
@@ -620,42 +620,10 @@ mypageElement.addEventListener("click", () => {
         backgroundColor: [
           'rgba(0, 0, 0, 0)'
         ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
+        borderColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
       }]
     },
-    options: {
-      legend: {
-        labels: {
-          fontColor: "white",
-        }
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            fontColor : "white",
-          },
-          gridLines:{
-            color: 'white',
-          }
-        }],
-        xAxes: [{
-          ticks:{
-            fontColor : 'white',
-          },
-          gridLines:{
-            color: "white",
-            }
-          }]
-        }
-      }
-    })
+  })
 
   let barChart01 = new Chart(barChartElement01,{
     type : 'bar',
