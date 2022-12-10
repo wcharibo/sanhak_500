@@ -271,6 +271,8 @@ restartElement.addEventListener("click", () => {
   getMode();
   worstWordDisplay();
   resetAnimation();
+  barChart00.destroy();
+  barChart01.destroy();
 });
 
 const worstWordDisplay = () => {   //취약문자가 존재하면 recommend mode로 연습할 때 어떤 문자가 취약하며 연습을 하고 있는 지 보여줌
@@ -617,6 +619,8 @@ let barChartElement00 = document.getElementById('bar-chart00');
 let barChartElement01 = document.getElementById('bar-chart01');
 let barChartContainerElement = document.querySelector('#chartContainer');
 let graphElement = document.querySelector("#graphButton");
+let barChart00;
+let barChart01;
 
 graphElement.addEventListener("click", () => {
   barChartContainerElement.style.display = 'block';
@@ -625,7 +629,7 @@ graphElement.addEventListener("click", () => {
   wordInputElement.style.display = "none";
   timerElement.style.display = "none";
   
-  let barChart00 = new Chart(barChartElement00,{
+  barChart00 = new Chart(barChartElement00,{
     type : 'bar',
     data :{
       labels : ["a","b","c","d","e","f","g","h","i","j","k","l","m",
@@ -651,7 +655,7 @@ graphElement.addEventListener("click", () => {
     }
   })
 
-  let barChart01 = new Chart(barChartElement01,{
+  barChart01 = new Chart(barChartElement01,{
     type : 'bar',
     data :{
       labels : ["a","b","c","d","e","f","g","h","i","j","k","l","m",
